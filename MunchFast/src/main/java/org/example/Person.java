@@ -30,6 +30,7 @@ abstract public class Person {
 
     /**
      * This method sets the person's phone number.
+     * It accepts 3 formats to be user-friendly, but formats it
      *
      * @param phone is the provided phone number to be checked, formatted and set.
      * @throws InvalidArgumentException if the phone format is invalid.
