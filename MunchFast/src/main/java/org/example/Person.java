@@ -25,7 +25,7 @@ abstract public class Person {
         setFirstName(firstname);
         setLastName(lastname);
         setEmail(email);
-        this.phone = phone;
+        setPhone(phone);
     }
 
     /**
