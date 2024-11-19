@@ -95,6 +95,10 @@ public class DatabaseConnectivity {
     public static void createCustomersTable() {
         String sql = "CREATE TABLE IF NOT EXISTS CUSTOMERS (\n"
                 + " CUSTOMER_ID INTEGER PRIMARY KEY, \n"
+                + " F_NAME TEXT NOT NULL, \n"
+                + " L_NAME TEXT NOT NULL, \n"
+                + " EMAIL TEXT NOT NULL, \n"
+                + " PHONE_NUMBER TEXT NOT NULL, \n"
                 + " DELIVERY_ADDRESS TEXT NOT NULL, \n"
                 + " );";
         // maybe add a check constraint for the allergy
@@ -115,6 +119,10 @@ public class DatabaseConnectivity {
     public static void createDriversTable() {
         String sql = "CREATE TABLE IF NOT EXISTS DRIVERS (\n"
                 + " DRIVER_ID INTEGER PRIMARY KEY, \n"
+                + " F_NAME TEXT NOT NULL, \n"
+                + " L_NAME TEXT NOT NULL, \n"
+                + " EMAIL TEXT NOT NULL, \n"
+                + " PHONE_NUMBER TEXT NOT NULL, \n"
                 + " LICENSE_PLATE TEXT NOT NULL, \n"
                 + " LICENSE_NUMBER TEXT NOT NULL, \n"
                 + " RATING INT, \n"
@@ -158,50 +166,90 @@ public class DatabaseConnectivity {
     }
 
     /**
-     * Create Persons Table
-     * Question for Teacher regarding Inheritance (when the super class is  Abstract)
-     * CREATE TABLE Persons (
-     * PersonID INTEGER PRIMARY KEY,
-     * Name TEXT NOT NULL,
-     * ContactInfo TEXT,
-     * Type TEXT CHECK(Type IN ('Customer', 'Driver'))
-     * );
-     * CREATE TABLE Customers (
-     * PersonID INTEGER PRIMARY KEY,
-     * Address TEXT,
-     * PreferredPaymentMethod TEXT,
-     * FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
-     * );
-     * CREATE TABLE Drivers (
-     * PersonID INTEGER PRIMARY KEY,
-     * LicenseNumber TEXT,
-     * VehicleType TEXT,
-     * FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
-     * );
+     * Create a Drinks Table
      */
-    public static void createPersonsTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS PERSONS (\n"
-                + " PERSON_ID INTEGER PRIMARY KEY,"
-                + " F_NAME TEXT NOT NULL, \n"
-                + " L_NAME TEXT NOT NULL, \n"
-                + " EMAIL TEXT NOT NULL, \n"
-                + " PHONE_NUMBER TEXT NOT NULL"
-                + ");";
-
+    public static void createDrinksTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS DRINKS (\n"
+                + " DRINK_ID INTEGER PRIMARY KEY, \n"
+                + " NAME TEXT NOT NULL,\n"
+                + " COST DECIMAL(5,2) \n"
+                + " QUANTITY INTEGER \n"
+                + " MAIN_INGREDIENTS TEXT \n"
+                + " CONTAINS_MEAT TEXT \n"
+                + " );";
         try (Connection connection = connect();
              Statement statement = connection.createStatement()) {
             statement.execute(sql);
-            System.out.println("Persons Table created successfully");
+            System.out.println("Drinks Table created successfully");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     /**
+     * Create a Food Table (FOOD = MAIN COURSE)
+     */
+    public static void createFoodTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS FOOD (\n"
+                + " FOOD_ID INTEGER PRIMARY KEY, \n"
+                + " NAME TEXT NOT NULL,\n"
+                + " COST DECIMAL(5,2) \n"
+                + " QUANTITY INTEGER \n"
+                + " MAIN_INGREDIENTS TEXT \n"
+                + " CONTAINS_MEAT TEXT \n"
+                + " );";
+        try (Connection connection = connect();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Drinks Table created successfully");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Create a SideDish Table
+     */
+    public static void createSideDishesTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS SIDE_DISHES (\n"
+                + " SIDE_DISH_ID INTEGER PRIMARY KEY, \n"
+                + " NAME TEXT NOT NULL,\n"
+                + " COST DECIMAL(5,2) \n"
+                + " QUANTITY INTEGER \n"
+                + " MAIN_INGREDIENTS TEXT \n"
+                + " CONTAINS_MEAT TEXT \n"
+                + " );";
+        try (Connection connection = connect();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Drinks Table created successfully");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     *                   " DRIVER_ID INTEGER PRIMARY KEY, \n"
+     *                 + " F_NAME TEXT NOT NULL, \n"
+     *                 + " L_NAME TEXT NOT NULL, \n"
+     *                 + " EMAIL TEXT NOT NULL, \n"
+     *                 + " PHONE_NUMBER TEXT NOT NULL, \n"
+     *                 + " LICENSE_PLATE TEXT NOT NULL, \n"
+     *                 + " LICENSE_NUMBER TEXT NOT NULL, \n"
+     *                 + " RATING INT, \n"
+     *                 + " AVAILABILITY TEXT NOT NULL, \n"
+     *                 + " ORDER_ID INTEGER DEFAULT NULL, \n"
+     *                 + " FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID)"
+     */
+    public static void addDriver(){
+        String sql = " INSERT INTO DRIVERS()";
+    }
+
+    /**
      * View Menu (view the concrete item) of a Restaurant (by Type)
      */
     public static void viewMenu() {
-        String sql = "SELECT "
+        String sql = " ";
     }
 
 
