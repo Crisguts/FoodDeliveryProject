@@ -186,6 +186,24 @@ public class DatabaseConnectivity {
         }
     }
 
+    public static void createDrinkMenuSchedulesTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS DRINK_MENU_SCHEDULES (\n"
+                + " DRINK_ID INTEGER, \n"
+                + " MENU_SCHEDULE_ID INTEGER, \n"
+                + " FOREIGN KEY (DRINK_ID) REFERENCES DRINKS(DRINK_ID),\n"
+                + " FOREIGN KEY (MENU_SCHEDULE_ID) REFERENCES MENU_SCHEDULES(MENU_SCHEDULE_ID),\n"
+                + " PRIMARY KEY (DRINK_ID, MENU_SCHEDULE_ID)\n"
+                + " );";
+        try (Connection connection = connect();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Drink Menu Schedules Table created successfully");
+        } catch (SQLException e) {
+            System.out.println("Caught SQLException inside the createDrinkMenuSchedulesTable(): " + e.getMessage());
+        }
+    }
+
+
     /**
      * Create a Food Table (FOOD = MAIN COURSE)
      */
@@ -206,6 +224,23 @@ public class DatabaseConnectivity {
             System.out.println(e.getMessage());
         }
     }
+    public static void createFoodMenuSchedulesTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS FOOD_MENU_SCHEDULES (\n"
+                + " FOOD_ID INTEGER, \n"
+                + " MENU_SCHEDULE_ID INTEGER, \n"
+                + " FOREIGN KEY (FOOD_ID) REFERENCES FOOD(FOOD_ID),\n"
+                + " FOREIGN KEY (MENU_SCHEDULE_ID) REFERENCES MENU_SCHEDULES(MENU_SCHEDULE_ID),\n"
+                + " PRIMARY KEY (FOOD_ID, MENU_SCHEDULE_ID)\n"
+                + " );";
+        try (Connection connection = connect();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Food Menu Schedules Table created successfully");
+        } catch (SQLException e) {
+            System.out.println("Caught SQLException inside the createFoodMenuSchedulesTable(): " + e.getMessage());
+        }
+    }
+
 
     /**
      * Create a SideDish Table
@@ -225,6 +260,23 @@ public class DatabaseConnectivity {
             System.out.println("Drinks Table created successfully");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void createSideDishMenuSchedulesTable(){
+        String sql = "CREATE TABLE IF NOT EXISTS SIDE_DISH_MENU_SCHEDULES (\n"
+                + " SIDE_DISH_ID INTEGER, \n"
+                + " MENU_SCHEDULE_ID INTEGER, \n"
+                + " FOREIGN KEY (SIDE_DISH_ID) REFERENCES SIDE_DISHES(SIDE_DISH_ID),\n"
+                + " FOREIGN KEY (MENU_SCHEDULE_ID) REFERENCES MENU_SCHEDULES(MENU_SCHEDULE_ID),\n"
+                + " PRIMARY KEY (SIDE_DISH_ID, MENU_SCHEDULE_ID)\n"
+                + " );";
+        try (Connection connection = connect();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Side Dish Menu Schedules Table created successfully");
+        } catch (SQLException e) {
+            System.out.println("Caught SQLException inside the createSideDishMenuSchedulesTable(): " + e.getMessage());
         }
     }
 
@@ -261,7 +313,7 @@ public class DatabaseConnectivity {
     }
 
     /**
-     * Add a Customer to the Customers Table
+     * Add a Customer to the Customers Table (maybe we don't need to insert a customer_id)
      * @param customer_id
      * @param f_name
      * @param l_name
