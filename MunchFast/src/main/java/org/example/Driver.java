@@ -29,7 +29,7 @@ public class Driver extends Person {
         isAvailable = true; //initially true since well no orders assigned to it
         rating = 0.0;
         setLicensePlate(licenseP);
-        licenseNumber = licenseNb;
+        setLicenseNumber(licenseNb);
     }
 
 
@@ -73,7 +73,78 @@ public class Driver extends Person {
         return false;
     }
 
-    public void setLicenseNumber(String licenseNumber) {
+    /**
+     * This method validates the license number qc format based on : A####DDMMYY##        #= any numbers
+     *
+     * @param number provided license nb
+     * @return whether its valid or not
+     */
+    private boolean licenseNumberValidator(String number) {
+        if (number == null) {
+            return false;
+        }
+        //format length
+        if (number.length() != 11) {
+            return false;
+        }
+        //A= the first letter of your last name and rest is digit
+        if (!(Character.isAlphabetic(number.charAt(0)) || number.substring(1).chars().allMatch(Character::isDigit))) {
+            return false;
+        }
+        //variables for easier calling
+        int day = Integer.parseInt(number.substring(5, 7)); //D= day of birth year
+        int month = Integer.parseInt(number.substring(7, 9)); //M= month of birth year
+        int year = Integer.parseInt(number.substring(9, 11)); //Y= the last two numbers of birth year
+
+        //if born before 1949 return false, if born after 2006 return false, (basically must be between 18 and like 70
+        if (year < 49 && !(year <= 6)) {
+            return false;
+        }
+
+        //month must be between 1 and 12
+        if (!(month > 0 && month <= 12)) {
+            return false;
+        }
+
+        //IF WE HAVE THE TIME, AN ARRAY COULD BE USED TO STORE DAY PER MONTH VALUES AND MAKE THIS METHOD MORE EFFICIENT
+
+        //31 day months
+        if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+            if (!(day > 0 && day <= 31)) {
+                return false;
+            }
+            //30 day months
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            if (!(day > 0 && day < 31)) {
+                return false;
+            }
+        } else if (month == 2) {
+            //if leap then  feb has 29 days
+            if (year == 52 || year == 56 || year == 60 || year == 64 || year == 68 ||
+                    year == 72 || year == 76 || year == 80 || year == 84 || year == 88 ||
+                    year == 92 || year == 96 || year == 0 || year == 4) {
+                if (!(day > 0 && day <= 29)) {
+                    return false;
+                }
+                //not leap feb has 28 days
+            } else if (!(day > 0 && day <= 28)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * This method sets the license number if valid
+     *
+     * @param licenseNumber provided license nb
+     * @throws InvalidArgumentException if invalid format
+     */
+    public void setLicenseNumber(String licenseNumber) throws InvalidArgumentException {
+        if (!licenseNumberValidator(licenseNumber)) {
+            throw new InvalidArgumentException("Invalid Quebec License Or Invalid Format.");
+        }
         this.licenseNumber = licenseNumber;
     }
 
@@ -97,6 +168,7 @@ public class Driver extends Person {
         }
     }
 
+
     /**
      * This method sets the availability of the driver
      *
@@ -106,6 +178,10 @@ public class Driver extends Person {
         isAvailable = available;
     }
 
+
+    /**
+     * @param assignedOrder
+     */
     public void takeOrder(Order assignedOrder) {
         if (this.assignedOrder != null) {
             //reject the order
