@@ -249,11 +249,7 @@ public class DatabaseConnectivity {
      * View Menu (view the concrete item) of a Restaurant (by Type)
      */
     public static void viewMenu() {
-<<<<<<< Updated upstream
-        String sql = " ";
-=======
 
->>>>>>> Stashed changes
     }
 
 
