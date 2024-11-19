@@ -94,27 +94,29 @@ abstract public class Person {
         }
 
         char[] arr = email.toCharArray();
-        if (arr[0] == '@' || arr[0] == '.' || !Character.isAlphabetic(arr[arr.length - 1])) {
+        if (arr[0] == '@' || arr[0] == '.' || !Character.isAlphabetic(arr[arr.length - 1]) || !Character.isAlphabetic(arr[0])) {
             return false;
         }
 
-        boolean symbolFound = false;
-        boolean dotFound = false;
+        int symbolFound = 0;
+        int dotFound = 0;
 
         for (char c : arr) {
 
             if (c == '.') {
-                dotFound = true;
+                dotFound ++;
             }
             if (c == '@') {
-                symbolFound = true;
+                symbolFound ++;
             }
-            if (!symbolFound && dotFound || c == ' ') {
+            if(c == ' '){
                 return false;
             }
-
         }
-        return symbolFound && dotFound;
+        if ((symbolFound == 0) && dotFound >= 0) {
+            return false;
+        }
+        return symbolFound == 1 && dotFound >= 1;
     }
 
     /**
@@ -136,14 +138,14 @@ abstract public class Person {
      * @param phone provided phone to be checked.
      * @return boolean response of whether the phone is valid or not.
      */
-    private boolean phoneChecker(String phone) {
+     private boolean phoneChecker(String phone) {
         if (phone == null) {
             return false;
         }
         //format like XXX-XXX-XXXX or XXX XXX XXXX
         if (phone.length() == 12) {
             for (int i = 0; i < 12; i++) {
-                if (i == 3 || i == 8) {
+                if (i == 3 || i == 7) {
                     if (!(phone.charAt(i) == '-' || phone.charAt(i) == ' ')) {
                         return false;
                     }
@@ -168,17 +170,14 @@ abstract public class Person {
      * @param phone provided phone to be formatted.
      * @return formatted phone number.
      */
-    private String formatPhone(String phone) {
+     private String formatPhone(String phone) {
         if (phone == null) {
             return null;
-        }
-        //if contains - stop here
-        if (phone.contains("-")) {
-            return phone;
         }
 
         //remove spaces
         phone = phone.replaceAll(" ", "");
+        phone = phone.replaceAll("-", "");
         if (phoneChecker(phone)) {
             return phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
         }
