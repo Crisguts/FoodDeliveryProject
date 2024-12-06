@@ -2,10 +2,7 @@ package org.example;
 
 import lombok.Getter;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,40 +16,6 @@ public class Customer {
     private String phone;
     private String deliveryAddress;
 
-
-
-    //                + " CUSTOMER_ID INTEGER PRIMARY KEY, \n"
-    //                + " F_NAME TEXT NOT NULL, \n"
-    //                + " L_NAME TEXT NOT NULL, \n"
-    //                + " EMAIL TEXT NOT NULL, \n"
-    //                + " PHONE_NUMBER TEXT NOT NULL, \n"
-    //                + " DELIVERY_ADDRESS TEXT NOT NULL \n"
-    //                + " );";
-// Method to get all customers from the database
-    public static List<Customer> getAllCustomers() {
-        String sql = "SELECT * FROM CUSTOMERS";
-        List<Customer> customers = new ArrayList<>();
-
-        try (Connection connection = DatabaseConnectivity.connect();
-             Statement stmt = connection.createStatement()) {
-
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Customer customer = new Customer(
-                        rs.getString("F_NAME"),
-                        rs.getString("L_NAME"),
-                        rs.getString("EMAIL"),
-                        rs.getString("PHONE_NUMBER"),
-                        rs.getString("DELIVER_ADDRESS")
-                );
-                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
-                customers.add(customer);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error fetching all customers: " + e.getMessage());
-        }
-        return customers;
-    }
 
     /**
      *
@@ -229,6 +192,77 @@ public class Customer {
 
     public void setCustomerId(int id){
          this.id = id;
+    }
+
+    // For Login:
+
+    // Method to get a customer by email (e.g., for login)
+    public static Customer getCustomerByEmail(String email) {
+        String sql = "SELECT * FROM CUSTOMERS WHERE EMAIL = ?";
+        Customer customer = null;
+
+        try (Connection connection = DatabaseConnectivity.connect();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                customer = new Customer(
+                        rs.getString("F_NAME"),
+                        rs.getString("L_NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PHONE_NUMBER"),
+                        rs.getString("DELIVER_ADDRESS")
+                );
+                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching customer by email: " + e.getMessage());
+        }
+        return customer;
+    }
+
+    // Method to get all customers from the database
+    public static List<Customer> getAllCustomers() {
+        String sql = "SELECT * FROM CUSTOMERS";
+        List<Customer> customers = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnectivity.connect();
+             Statement stmt = connection.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Customer customer = new Customer(
+                        rs.getString("F_NAME"),
+                        rs.getString("L_NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PHONE_NUMBER"),
+                        rs.getString("DELIVER_ADDRESS")
+                );
+                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
+                customers.add(customer);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all customers: " + e.getMessage());
+        }
+        return customers;
+    }
+    // Method to add a new customer to the database
+    public static void addCustomer(Customer customer) {
+        String sql = "INSERT INTO CUSTOMERS (F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnectivity.connect();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, customer.getFirstName());
+            pstmt.setString(2, customer.getLastName());
+            pstmt.setString(3, customer.getEmail());
+            pstmt.setString(4, customer.getPhone());
+            pstmt.setString(5, customer.getDeliveryAddress());
+            pstmt.executeUpdate();
+            System.out.println("Customer added successfully.");
+        } catch (SQLException e) {
+            System.err.println("Error adding customer: " + e.getMessage());
+        }
     }
 
 }
