@@ -1,50 +1,36 @@
 package org.example;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MenuItemDTO implements Item{
+public class MenuItemDTO{
+    @Getter
     private int itemId;
+    @Getter
     @Setter
     private String name;
+    @Getter
     @Setter
     private double price;
+    @Getter
     @Setter
     private int stock;
+    @Getter
     @Setter
+    private int menuTypeId;
     private String type;
 
     // Constructor
-    public MenuItemDTO(int itemId, String name, double price, int stock, String type) {
+    public MenuItemDTO(int itemId, String name, double price, int stock, int menuTypeId) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;
         this.stock = stock;
-        this.type = type;
-    }
-
-    // Getters and Setters
-    public int getItemId() {
-        return itemId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public String getType() {
-        return type;
+        this.menuTypeId = menuTypeId;
     }
 
     public static void updateStock(int itemId, int quantityOrdered) {

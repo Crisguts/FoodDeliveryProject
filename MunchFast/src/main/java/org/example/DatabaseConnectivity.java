@@ -88,7 +88,6 @@ public class DatabaseConnectivity {
         }
     }
 
-
     /**
      * Create Orders Table
      */
@@ -98,7 +97,7 @@ public class DatabaseConnectivity {
                 + " CUSTOMER_ID INTEGER, \n"
                 + " STATUS TEXT NOT NULL, \n"
                 + " DELIVERY_TIME INTEGER NOT NULL, \n"
-                + " CUSTOMER_INSTRUCTIONS TEXT"
+                + " FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID), \n"
                 + " );";
 
         // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER

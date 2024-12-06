@@ -247,21 +247,22 @@ public class Customer {
         }
         return customers;
     }
-    // Method to add a new customer to the database
-    public static void addCustomer(Customer customer) {
-        String sql = "INSERT INTO CUSTOMERS (F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES (?, ?, ?, ?, ?)";
+    // Method for the object to save itself to the database
+    public void saveToDatabase() {
+        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnectivity.connect();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, customer.getFirstName());
-            pstmt.setString(2, customer.getLastName());
-            pstmt.setString(3, customer.getEmail());
-            pstmt.setString(4, customer.getPhone());
-            pstmt.setString(5, customer.getDeliveryAddress());
+            pstmt.setInt(1, this.id);
+            pstmt.setString(2, this.firstName);
+            pstmt.setString(3, this.lastName);
+            pstmt.setString(4, this.email);
+            pstmt.setString(5, this.phone);
+            pstmt.setString(6, this.deliveryAddress);
             pstmt.executeUpdate();
-            System.out.println("Customer added successfully.");
+            System.out.println("Customer saved to database.");
         } catch (SQLException e) {
-            System.err.println("Error adding customer: " + e.getMessage());
+            System.err.println("Error saving customer: " + e.getMessage());
         }
     }
 
