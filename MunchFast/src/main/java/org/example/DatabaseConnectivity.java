@@ -26,25 +26,6 @@ public class DatabaseConnectivity {
         return conn;
     }
 
-    /**
-     * Create a Restaurant Table
-     */
-//    public static void createRestaurantsTable() {
-//        String sql = "CREATE TABLE IF NOT EXISTS RESTAURANTS (\n"
-//                + " RESTAURANT_ID INTEGER PRIMARY KEY, \n"
-//                + " NAME TEXT NOT NULL, \n"
-//                + " LOCATION TEXT NOT NULL, \n"
-//                + " RATING INT"
-//                + " );";
-//        try (Connection conn = connect();
-//             Statement statement = conn.createStatement()) {
-//            statement.execute(sql);
-//            System.out.println("Restaurant Table created successfully");
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
     public static void createMenuTable() {
         String sql = "CREATE TABLE IF NOT EXISTS MENU (\n"
                 + " ITEM_ID INTEGER PRIMARY KEY,\n"
@@ -137,9 +118,8 @@ public class DatabaseConnectivity {
                 + " ORDER_ID INTEGER, \n"
                 + " ITEM_ID INTEGER, \n"
                 + " QUANTITY INTEGER, \n"
-                + " ORDER_ID INTEGER, \n"
-                + " FOREIGN KEY (ORDER_ID) REFERENCES orders(ORDER_ID),\n"
-                + " FOREIGN KEY (ITEM_ID) REFERENCES menu(ITEM_ID)"
+                + " FOREIGN KEY (ORDER_ID) REFERENCES ORDERS (ORDER_ID),\n"
+                + " FOREIGN KEY (ITEM_ID) REFERENCES MENU(ITEM_ID)"
                 + " );";
 
         // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER
@@ -237,15 +217,16 @@ public class DatabaseConnectivity {
     }
 
     public static void main(String[] args) {
-        // createCustomersTable();
-        //  addCustomer(5,"Flor","Ko","mail@.com","432 234 4322","Westisland");
 
         createMenuTable();
         createMenuSchedulesTable();
-
+        createOrdersTable();
+        createOrderItemsTable();
+        createCustomersTable();
+        //  addCustomer(5,"Flor","Ko","mail@.com","432 234 4322","Westisland");
         // insert once
-        addMenuItems();
-        addMenuSchedule();
+//        addMenuItems();
+//        addMenuSchedule();
 
     }
 

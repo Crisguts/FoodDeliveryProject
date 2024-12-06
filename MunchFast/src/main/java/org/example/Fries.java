@@ -1,6 +1,6 @@
 package org.example;
 
-public class Fries  extends Item implements Side{
+public class Fries  extends Item {
     /**
      *
      */
