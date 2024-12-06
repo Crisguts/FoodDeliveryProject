@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnectivity {
-    private static final String url = "jdbc:sqlite:munchdatatest.db";
+    public static final String url = "jdbc:sqlite:munchdatatest.db";
 
     /**
      * Connect to the database
@@ -48,7 +48,7 @@ public class DatabaseConnectivity {
     /**
      * Create a Menu Schedule Table.
      * This class contains the different menu types (breakfast, lunch, dinner)
-     *  Each menu types have different time slots.
+     * Each menu types have different time slots.
      */
     public static void createMenuSchedulesTable() {
         String sql = "CREATE TABLE IF NOT EXISTS MENU_SCHEDULES (\n"
@@ -111,6 +111,7 @@ public class DatabaseConnectivity {
             System.out.println(e.getMessage());
         }
     }
+
     // Stores the items in each order.
     public static void createOrderItemsTable() {
         String sql = "CREATE TABLE IF NOT EXISTS ORDER_ITEMS (\n"
@@ -134,7 +135,6 @@ public class DatabaseConnectivity {
     }
 
     /**
-     *
      * @param customer_id
      * @param f_name
      * @param l_name
@@ -170,7 +170,7 @@ public class DatabaseConnectivity {
      * 2: Lunch
      * 3: Dinner
      */
-    public static void addMenuItems(){
+    public static void addMenuItems() {
         String sql = "INSERT INTO MENU (ITEM_ID, NAME, PRICE, QUANTITY, MENU_TYPE_ID) VALUES " +
                 "(1, 'Coffee', 3.50, 100, 1), " +
                 "(2, 'Orange Juice', 5.99, 100, 1), " +
@@ -187,7 +187,7 @@ public class DatabaseConnectivity {
         }
     }
 
-    public static void addMenuSchedule(){
+    public static void addMenuSchedule() {
         String sql = "INSERT INTO MENU_SCHEDULES (MENU_TYPE_ID, MENU_TYPE,TIME_SLOT) VALUES " +
                 "(1, 'Breakfast', '08:00:00'), " +
                 "(2, 'Lunch', '12:00:00'), " +
@@ -212,7 +212,7 @@ public class DatabaseConnectivity {
      * Status updated
      * Update this and do popup
      */
-    public static void updateStatusByOrder(){
+    public static void updateStatusByOrder() {
 
     }
 

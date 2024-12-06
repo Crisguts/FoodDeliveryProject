@@ -10,10 +10,15 @@ package org.example;
  */
 public class MunchFast extends javax.swing.JFrame {
 
+    Customer current;
     /**
      * Creates new form MunchFast
      */
     public MunchFast() {
+        initComponents();
+    }
+    public MunchFast(Customer c) {
+        current = c;
         initComponents();
     }
 
