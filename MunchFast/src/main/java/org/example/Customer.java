@@ -2,30 +2,73 @@ package org.example;
 
 import lombok.Getter;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class Customer {
-    private static int counter = 0;
-    protected int id;
-    protected String firstName;
-    protected String lastName;
-    protected String email;
-    protected String phone;
+    private static int counter = 1;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+    private String deliveryAddress;
+
+
+
+    //                + " CUSTOMER_ID INTEGER PRIMARY KEY, \n"
+    //                + " F_NAME TEXT NOT NULL, \n"
+    //                + " L_NAME TEXT NOT NULL, \n"
+    //                + " EMAIL TEXT NOT NULL, \n"
+    //                + " PHONE_NUMBER TEXT NOT NULL, \n"
+    //                + " DELIVERY_ADDRESS TEXT NOT NULL \n"
+    //                + " );";
+// Method to get all customers from the database
+    public static List<Customer> getAllCustomers() {
+        String sql = "SELECT * FROM CUSTOMERS";
+        List<Customer> customers = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnectivity.connect();
+             Statement stmt = connection.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Customer customer = new Customer(
+                        rs.getString("F_NAME"),
+                        rs.getString("L_NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PHONE_NUMBER"),
+                        rs.getString("DELIVER_ADDRESS")
+                );
+                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
+                customers.add(customer);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all customers: " + e.getMessage());
+        }
+        return customers;
+    }
 
     /**
-     * To initialize and set the Person's properties.
      *
-     * @param firstname to initialize the first name value.
-     * @param lastname  to initialize the last name value.
-     * @param email     to initialize the email value.
-     * @param phone     to initialize the phone value.
-     * @throws InvalidArgumentException if any parameter is invalid.
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param phoneNumber
+     * @param deliveryAddress
      */
-    public Customer(String firstname, String lastname, String email, String phone) throws InvalidArgumentException {
-        id = ++counter;
-        setFirstName(firstname);
-        setLastName(lastname);
-        setEmail(email);
-        setPhone(phone);
+    public Customer(String firstName, String lastName, String email, String phoneNumber, String deliveryAddress) {
+        this.id = counter++; // Auto-increment customer ID
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phoneNumber;
+        this.deliveryAddress = deliveryAddress;
     }
 
     /**
@@ -182,6 +225,10 @@ public class Customer {
             return phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
         }
         return null;
+    }
+
+    public void setCustomerId(int id){
+         this.id = id;
     }
 
 }
