@@ -57,6 +57,7 @@ public class MunchFast extends javax.swing.JFrame {
         exitButton = new javax.swing.JButton();
         exitButton1 = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 300), new java.awt.Dimension(0, 300), new java.awt.Dimension(32767, 300));
+        orderButton = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -69,7 +70,6 @@ public class MunchFast extends javax.swing.JFrame {
         jLabel16.setText("Stock: ");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(730, 510));
         setMinimumSize(new java.awt.Dimension(730, 510));
         setResizable(false);
         setSize(new java.awt.Dimension(730, 510));
@@ -248,6 +248,9 @@ public class MunchFast extends javax.swing.JFrame {
             }
         });
 
+        orderButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        orderButton.setText("Place Order");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,7 +263,9 @@ public class MunchFast extends javax.swing.JFrame {
                     .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 308, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(orderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -280,6 +285,10 @@ public class MunchFast extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exitButton1)
                         .addGap(14, 14, 14))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(orderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -355,6 +364,7 @@ public class MunchFast extends javax.swing.JFrame {
     private javax.swing.JSpinner orangeCount2;
     private javax.swing.JLabel orangeLabel2;
     private javax.swing.JLabel orangeStockLabel2;
+    private javax.swing.JButton orderButton;
     private javax.swing.JSpinner ribsCount;
     private javax.swing.JLabel ribsLabel;
     private javax.swing.JLabel ribsStockLabel;
