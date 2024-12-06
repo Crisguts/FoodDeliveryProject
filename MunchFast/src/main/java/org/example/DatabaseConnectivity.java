@@ -147,7 +147,7 @@ public class DatabaseConnectivity {
         String sql = "CREATE TABLE IF NOT EXISTS ORDERS (\n"
                 + " ORDER_ID INTEGER PRIMARY KEY, \n"
                 + " CUSTOMER_ID INTEGER, \n"
-                + " DRIVER_ID INTEGER, \n"
+//                + " DRIVER_ID INTEGER, \n"
                 + " RESTAURANT_ID INTEGER, \n"
                 + " STATUS TEXT NOT NULL, \n"
                 + " DELIVERY_TIME INTEGER NOT NULL, \n"
@@ -350,6 +350,14 @@ public class DatabaseConnectivity {
      * View Menu (view the concrete item) of a Restaurant (by Type)
      */
     public static void viewMenu() {
+
+    }
+
+    /**
+     * Status updated
+     * Update this and do popup
+     */
+    public static void updateStatusByOrder(){
 
     }
 
