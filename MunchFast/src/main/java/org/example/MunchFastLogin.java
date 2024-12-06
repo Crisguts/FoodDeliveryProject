@@ -4,6 +4,8 @@
  */
 package org.example;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 22cri
@@ -28,8 +30,8 @@ public class MunchFastLogin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         exitButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        login_createAcc_Btn = new javax.swing.JButton();
+        emailTxtBox = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,8 +52,13 @@ public class MunchFastLogin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton2.setText("Login/Create Account");
+        login_createAcc_Btn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        login_createAcc_Btn.setText("Login/Create Account");
+        login_createAcc_Btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_createAcc_BtnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         jLabel2.setText("Welcome To Munch FASTTTT ! \nPlease login or create an account to continue.");
@@ -72,10 +79,10 @@ public class MunchFastLogin extends javax.swing.JFrame {
                         .addGap(208, 208, 208)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(emailTxtBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(258, 258, 258)
-                        .addComponent(jButton2)))
+                        .addComponent(login_createAcc_Btn)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,9 +93,9 @@ public class MunchFastLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailTxtBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(login_createAcc_Btn)
                 .addGap(30, 30, 30)
                 .addComponent(exitButton)
                 .addGap(23, 23, 23))
@@ -100,6 +107,16 @@ public class MunchFastLogin extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
          this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void login_createAcc_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_createAcc_BtnActionPerformed
+        if(emailTxtBox.getText() != null){
+            //get client list from model
+            //go through list and compare the text to the email data member
+            // if found then open new form and dispose this one (add a confirmation message
+        }
+        JOptionPane.showMessageDialog(this, "Nothing to login/create");
+        emailTxtBox.setText("");
+    }//GEN-LAST:event_login_createAcc_BtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,10 +154,10 @@ public class MunchFastLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField emailTxtBox;
     private javax.swing.JButton exitButton;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton login_createAcc_Btn;
     // End of variables declaration//GEN-END:variables
 }
