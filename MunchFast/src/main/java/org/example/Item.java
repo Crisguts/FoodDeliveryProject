@@ -5,6 +5,6 @@ public interface Item {
         double getPrice();
         int getStock();
         void setStock(int stock);
-        String getType();
+        String getType(); // Breakfast, for example
 }
 

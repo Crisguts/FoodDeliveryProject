@@ -15,7 +15,7 @@ public class DatabaseConnectivity {
      *
      * @return Connection
      */
-    private static Connection connect() {
+    public static Connection connect() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
