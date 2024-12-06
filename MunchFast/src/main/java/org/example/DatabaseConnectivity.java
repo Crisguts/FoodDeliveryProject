@@ -130,44 +130,28 @@ public class DatabaseConnectivity {
             System.out.println(e.getMessage());
         }
     }
+    // Stores the items in each order.
+    public static void createOrderItemsTable() {
+        String sql = "CREATE TABLE IF NOT EXISTS ORDER_ITEMS (\n"
+                + " ORDER_ITEM_ID INTEGER PRIMARY KEY, \n"
+                + " ORDER_ID INTEGER, \n"
+                + " ITEM_ID INTEGER, \n"
+                + " QUANTITY INTEGER, \n"
+                + " ORDER_ID INTEGER, \n"
+                + " FOREIGN KEY (ORDER_ID) REFERENCES orders(ORDER_ID),\n"
+                + " FOREIGN KEY (ITEM_ID) REFERENCES menu(ITEM_ID)"
+                + " );";
 
-//    /**
-//     * Create a SideDish Table
-//     */
-//    public static void createSideDishesTable() {
-//        String sql = "CREATE TABLE IF NOT EXISTS SIDE_DISHES (\n"
-//                + " SIDE_DISH_ID INTEGER PRIMARY KEY, \n"
-//                + " NAME TEXT NOT NULL,\n"
-//                + " COST DECIMAL(5,2), \n"
-//                + " QUANTITY INTEGER, \n"
-//                + " MAIN_INGREDIENTS TEXT, \n"
-//                + " CONTAINS_MEAT TEXT \n"
-//                + " );";
-//        try (Connection connection = connect();
-//             Statement statement = connection.createStatement()) {
-//            statement.execute(sql);
-//            System.out.println("Drinks Table created successfully");
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    public static void createSideDishMenuSchedulesTable() {
-//        String sql = "CREATE TABLE IF NOT EXISTS SIDE_DISH_MENU_SCHEDULES (\n"
-//                + " SIDE_DISH_ID INTEGER, \n"
-//                + " MENU_SCHEDULE_ID INTEGER, \n"
-//                + " FOREIGN KEY (SIDE_DISH_ID) REFERENCES SIDE_DISHES(SIDE_DISH_ID),\n"
-//                + " FOREIGN KEY (MENU_SCHEDULE_ID) REFERENCES MENU_SCHEDULES(MENU_SCHEDULE_ID),\n"
-//                + " PRIMARY KEY (SIDE_DISH_ID, MENU_SCHEDULE_ID)\n"
-//                + " );";
-//        try (Connection connection = connect();
-//             Statement statement = connection.createStatement()) {
-//            statement.execute(sql);
-//            System.out.println("Side Dish Menu Schedules Table created successfully");
-//        } catch (SQLException e) {
-//            System.out.println("Caught SQLException inside the createSideDishMenuSchedulesTable(): " + e.getMessage());
-//        }
-//    }
+        // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER
+        // STATUS: ON THE WAY, OR DELIVERED
+        try (Connection connection = connect();
+             Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            System.out.println("Order Table created successfully");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      *
