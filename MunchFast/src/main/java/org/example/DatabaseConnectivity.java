@@ -111,7 +111,6 @@ public class DatabaseConnectivity {
         }
     }
 
-    // ADDITIONAL FEATURE: REMOVE DRIVER IF THEY HAVE LESS THAN A 1-STAR RATING??
 
     /**
      * Create a Drivers table.
@@ -356,13 +355,13 @@ public class DatabaseConnectivity {
 
 
     public static void main(String[] args) {
-       // createDriversTable();
-       // addDriver(1, "Cris", "Racila", "cr@gmail.com", "312-123-1233", "AAE123", "C5742220806", 1);
+        // createDriversTable();
+        // addDriver(1, "Cris", "Racila", "cr@gmail.com", "312-123-1233", "AAE123", "C5742220806", 1);
 
         //createDrinksTable();
         //createRestaurantsTable();
-        createCustomersTable();
-        addCustomer(5,"Flor","Ko","mail@.com","432 234 4322","Westisland");
+        // createCustomersTable();
+        //  addCustomer(5,"Flor","Ko","mail@.com","432 234 4322","Westisland");
     }
 
 }
