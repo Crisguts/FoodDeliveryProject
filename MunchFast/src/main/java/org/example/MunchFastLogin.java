@@ -153,13 +153,13 @@ public class MunchFastLogin extends javax.swing.JFrame {
     private void login_createAcc_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_createAcc_BtnActionPerformed
         if (emailTxtBox.getText() != null) {
             //get client list from model
-            List<Customer> clients = Customer.getAllCustomers();
+            List<Customer> clients = CustomerDAO.getAllCustomers();
             //go through list and compare the text to the email data member
             for (Customer c : clients) {
                 if (c.getEmail().equals(emailTxtBox.getText())) {
                     // if found then open new form and dispose this one (add a confirmation message
                     JOptionPane.showMessageDialog(this, "Welcome back!");
-                    new MunchFast(Customer.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
+                    new MunchFast(CustomerDAO.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
                     this.dispose();
                 }
             }

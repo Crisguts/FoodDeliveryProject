@@ -14,8 +14,8 @@ public class Customer {
     private String lastName;
     private String email;
     private String phone;
+    @lombok.Setter
     private String deliveryAddress;
-
 
     /**
      *
@@ -194,76 +194,28 @@ public class Customer {
          this.id = id;
     }
 
-    // For Login:
-
-    // Method to get a customer by email (e.g., for login)
-    public static Customer getCustomerByEmail(String email) {
-        String sql = "SELECT * FROM CUSTOMERS WHERE EMAIL = ?";
-        Customer customer = null;
-
-        try (Connection connection = DatabaseConnectivity.connect();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, email);
-
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                customer = new Customer(
-                        rs.getString("F_NAME"),
-                        rs.getString("L_NAME"),
-                        rs.getString("EMAIL"),
-                        rs.getString("PHONE_NUMBER"),
-                        rs.getString("DELIVER_ADDRESS")
-                );
-                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
-            }
-        } catch (SQLException e) {
-            System.err.println("Error fetching customer by email: " + e.getMessage());
-        }
-        return customer;
+    public int getId() {
+        return id;
     }
 
-    // Method to get all customers from the database
-    public static List<Customer> getAllCustomers() {
-        String sql = "SELECT * FROM CUSTOMERS";
-        List<Customer> customers = new ArrayList<>();
-
-        try (Connection connection = DatabaseConnectivity.connect();
-             Statement stmt = connection.createStatement()) {
-
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Customer customer = new Customer(
-                        rs.getString("F_NAME"),
-                        rs.getString("L_NAME"),
-                        rs.getString("EMAIL"),
-                        rs.getString("PHONE_NUMBER"),
-                        rs.getString("DELIVER_ADDRESS")
-                );
-                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
-                customers.add(customer);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error fetching all customers: " + e.getMessage());
-        }
-        return customers;
+    public String getFirstName() {
+        return firstName;
     }
-    // Method for the object to save itself to the database
-    public void saveToDatabase() {
-        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = DatabaseConnectivity.connect();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, this.id);
-            pstmt.setString(2, this.firstName);
-            pstmt.setString(3, this.lastName);
-            pstmt.setString(4, this.email);
-            pstmt.setString(5, this.phone);
-            pstmt.setString(6, this.deliveryAddress);
-            pstmt.executeUpdate();
-            System.out.println("Customer saved to database.");
-        } catch (SQLException e) {
-            System.err.println("Error saving customer: " + e.getMessage());
-        }
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
     }
 
 }

@@ -4,10 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderModel {
-    public List<OrderDTO> getOrdersByCustomerId(int customerId) {
+public class Order {
+    public List<OrderDAO> getOrdersByCustomerId(int customerId) {
         String sql = "SELECT * FROM ORDERS WHERE CUSTOMER_ID = ?";
-        List<OrderDTO> orders = new ArrayList<>();
+        List<OrderDAO> orders = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectivity.connect();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -16,7 +16,7 @@ public class OrderModel {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                orders.add(new OrderDTO(
+                orders.add(new OrderDAO(
                         rs.getInt("ORDER_ID"),
                         rs.getInt("CUSTOMER_ID"),
                         rs.getString("STATUS"),
@@ -32,7 +32,7 @@ public class OrderModel {
         return orders;
     }
 
-    public void createOrder(OrderDTO order) {
+    public void createOrder(OrderDAO order) {
         String sql = "INSERT INTO ORDERS (CUSTOMER_ID, STATUS, DELIVERY_TIME, CUSTOMER_INSTRUCTIONS) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnectivity.connect();
