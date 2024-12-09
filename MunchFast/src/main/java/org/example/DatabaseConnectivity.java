@@ -26,6 +26,9 @@ public class DatabaseConnectivity {
         return conn;
     }
 
+    /**
+     * The data is hardcoded in the ItemDAO
+     */
     public static void createMenuTable() {
         String sql = "CREATE TABLE IF NOT EXISTS MENU (\n"
                 + " ITEM_ID INTEGER PRIMARY KEY,\n"
@@ -46,6 +49,7 @@ public class DatabaseConnectivity {
 
 
     /**
+     * IDK ABT THIS ONE
      * Create a Menu Schedule Table.
      * This class contains the different menu types (breakfast, lunch, dinner)
      * Each menu types have different time slots.
@@ -63,7 +67,6 @@ public class DatabaseConnectivity {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     /**
@@ -97,7 +100,11 @@ public class DatabaseConnectivity {
                 + " CUSTOMER_ID INTEGER, \n"
                 + " STATUS TEXT NOT NULL, \n"
                 + " DELIVERY_TIME INTEGER NOT NULL, \n"
+<<<<<<< Updated upstream
                 + " FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID)"
+=======
+                + " FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID) \n"
+>>>>>>> Stashed changes
                 + " );";
 
         // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER

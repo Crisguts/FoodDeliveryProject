@@ -1,6 +1,6 @@
 package org.example;
 
-public class DinnerMenuFactory extends AbstractMenuFactory {
+public class DinnerMenuFactory {
 //    @Override
 //    public Food createFood(String type) {
 //        return null;

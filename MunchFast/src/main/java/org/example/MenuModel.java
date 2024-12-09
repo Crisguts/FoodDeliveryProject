@@ -6,8 +6,8 @@ import java.util.List;
 
 public class MenuModel {
     // Get Menu Items (from the database)
-    public List<MenuItemDTO> getMenuItems() {
-        List<MenuItemDTO> menuItems = new ArrayList<>();
+    public List<MenuItemDAO> getMenuItems() {
+        List<MenuItemDAO> menuItems = new ArrayList<>();
         String sql = "SELECT * FROM MENU"; // SQL to retrieve all menu items
 
         try (Connection conn = DatabaseConnectivity.connect();
@@ -19,7 +19,7 @@ public class MenuModel {
                 double price = rs.getDouble("PRICE");
                 int quantity = rs.getInt("QUANTITY");
                 int menuTypeId = rs.getInt("MENU_TYPE_ID");
-                MenuItemDTO item = new MenuItemDTO(itemId, name, price, quantity, menuTypeId);
+                MenuItemDAO item = new MenuItemDAO(itemId, name, price, quantity, menuTypeId);
                 menuItems.add(item);
             }
         } catch (SQLException e) {
@@ -30,7 +30,7 @@ public class MenuModel {
     }
 
     // Insert Menu Item into the Database
-    public void addMenuItem(MenuItemDTO item) {
+    public void addMenuItem(MenuItemDAO item) {
         String sql = "INSERT INTO MENU (ITEM_ID, NAME, PRICE, QUANTITY, MENU_TYPE_ID) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnectivity.connect();

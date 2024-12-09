@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MenuItemDTO{
+public class MenuItemDAO {
     @Getter
     private int itemId;
     @Getter
@@ -25,7 +25,7 @@ public class MenuItemDTO{
     private String type;
 
     // Constructor
-    public MenuItemDTO(int itemId, String name, double price, int stock, int menuTypeId) {
+    public MenuItemDAO(int itemId, String name, double price, int stock, int menuTypeId) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;
