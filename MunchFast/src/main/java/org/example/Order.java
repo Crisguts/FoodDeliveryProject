@@ -1,51 +1,52 @@
 package org.example;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Order {
-    public List<OrderDAO> getOrdersByCustomerId(int customerId) {
-        String sql = "SELECT * FROM ORDERS WHERE CUSTOMER_ID = ?";
-        List<OrderDAO> orders = new ArrayList<>();
+        private int orderId;               // Unique ID for the order
+        private int customerId;            // ID of the customer placing the order
+        private String status;             // Status of the order (e.g., "On the way", "Delivered")
+        private int deliveryTime;          // Delivery time in minutes
 
-        try (Connection connection = DatabaseConnectivity.connect();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
-            pstmt.setInt(1, customerId);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                orders.add(new OrderDAO(
-                        rs.getInt("ORDER_ID"),
-                        rs.getInt("CUSTOMER_ID"),
-                        rs.getString("STATUS"),
-                        rs.getInt("DELIVERY_TIME"),
-                        rs.getString("CUSTOMER_INSTRUCTIONS")
-                ));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error fetching orders: " + e.getMessage());
+        // Constructor
+        public Order(int orderId, int customerId, String status, int deliveryTime) {
+            this.orderId = orderId;
+            this.customerId = customerId;
+            this.status = status;
+            this.deliveryTime = deliveryTime;
         }
 
-        return orders;
-    }
-
-    public void createOrder(OrderDAO order) {
-        String sql = "INSERT INTO ORDERS (CUSTOMER_ID, STATUS, DELIVERY_TIME, CUSTOMER_INSTRUCTIONS) VALUES (?, ?, ?, ?)";
-
-        try (Connection connection = DatabaseConnectivity.connect();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
-            pstmt.setInt(1, order.getOrderId());
-            pstmt.setInt(1, order.getCustomerId());
-            pstmt.setString(2, order.getStatus());
-            pstmt.setInt(3, order.getDeliveryTime());
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.err.println("Error creating order: " + e.getMessage());
+        // Getters and Setters
+        public int getOrderId() {
+            return orderId;
         }
+
+        public void setOrderId(int orderId) {
+            this.orderId = orderId;
+        }
+
+        public int getCustomerId() {
+            return customerId;
+        }
+
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public int getDeliveryTime() {
+            return deliveryTime;
+        }
+
+        public void setDeliveryTime(int deliveryTime) {
+            this.deliveryTime = deliveryTime;
+        }
+
+
     }
-}
+

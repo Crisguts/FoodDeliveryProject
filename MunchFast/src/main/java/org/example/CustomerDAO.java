@@ -11,6 +11,26 @@ public class CustomerDAO {
         connection = DatabaseConnectivity.connect();
     }
 
+    // this method is called when controller added a customer
+    public static void addCustomer(int customer_id, String f_name, String l_name, String email, String phone_number
+            , String delivery_address) {
+        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES " +
+                "(?, ?, ?, ?, ?, ? )";
+
+        try (Connection connection = DatabaseConnectivity.connect();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, customer_id);
+            preparedStatement.setString(2, f_name);
+            preparedStatement.setString(3, l_name);
+            preparedStatement.setString(4, email);
+            preparedStatement.setString(5, phone_number);
+            preparedStatement.setString(6, delivery_address);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.err.println("Caught SQLException inside the addCustomer()" + e.getMessage());
+        }
+    }
+
     // Method to get a customer by email (e.g., for login)
     public static Customer getCustomerByEmail(String email) {
         String sql = "SELECT * FROM CUSTOMERS WHERE EMAIL = ?";
