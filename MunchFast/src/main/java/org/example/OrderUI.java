@@ -50,6 +50,11 @@ public class OrderUI extends javax.swing.JFrame {
 
         exitButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         backMenuButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         backMenuButton.setText("Back");
@@ -99,6 +104,10 @@ public class OrderUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backMenuButtonActionPerformed
 
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -135,7 +144,6 @@ public class OrderUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
     private javax.swing.JButton backMenuButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel viewOrderLabel;
