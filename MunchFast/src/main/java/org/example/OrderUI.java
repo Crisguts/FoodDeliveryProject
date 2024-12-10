@@ -10,11 +10,19 @@ package org.example;
  */
 public class OrderUI extends javax.swing.JFrame {
 
+    Customer current;
+
     /**
      * Creates new form OrderUI
      */
     public OrderUI() {
         initComponents();
+    }
+
+    public OrderUI(Customer c) {
+        current = c;
+        initComponents();
+        visualizeClientOrder.setText("WE GONNA PUT ORDER INFO HERE");
     }
 
     /**
@@ -28,37 +36,68 @@ public class OrderUI extends javax.swing.JFrame {
 
         visualizeClientOrder = new java.awt.TextArea();
         viewOrderLabel = new javax.swing.JLabel();
+        exitButton = new javax.swing.JButton();
+        backMenuButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        visualizeClientOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        visualizeClientOrder.setEditable(false);
+        visualizeClientOrder.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+
         viewOrderLabel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         viewOrderLabel.setText("View Your Order ");
+
+        exitButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        exitButton.setText("Exit");
+
+        backMenuButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        backMenuButton.setText("Back");
+        backMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backMenuButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(visualizeClientOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(viewOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(124, 124, 124))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(exitButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backMenuButton))
+                    .addComponent(visualizeClientOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(viewOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(visualizeClientOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(viewOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(visualizeClientOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exitButton)
+                    .addComponent(backMenuButton))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backMenuButtonActionPerformed
+        new MainMenu(current).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,6 +135,9 @@ public class OrderUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton backMenuButton;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel viewOrderLabel;
     private java.awt.TextArea visualizeClientOrder;
     // End of variables declaration//GEN-END:variables
