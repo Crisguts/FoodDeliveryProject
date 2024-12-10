@@ -96,9 +96,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         coffeeLabel.setText("Coffee");
 
+        coffeeCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+
         coffeeStockLabel.setText("Stock: ");
 
         riceLabel.setText("Rice");
+
+        riceCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
         riceStockLabel.setText("Stock: ");
 
@@ -108,7 +112,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         coffeePriceLabel.setText("1.99 $");
 
-        ricePriceLabel.setText("1.99 $");
+        ricePriceLabel.setText("3.99 $");
 
         javax.swing.GroupLayout breakfastPanelLayout = new javax.swing.GroupLayout(breakfastPanel);
         breakfastPanel.setLayout(breakfastPanelLayout);
@@ -143,7 +147,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(coffeePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ricePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         breakfastPanelLayout.setVerticalGroup(
             breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,11 +190,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         orangeLabel2.setText("Orange Juice");
 
+        orangeCount2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+
         orangeStockLabel2.setText("Stock: ");
 
         friesLabel.setText("Fries");
 
-        friesCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
+        friesCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
         friesStockLabel.setText("Stock: ");
 
@@ -200,7 +206,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         orangePriceLabel.setText("1.99 $");
 
-        friesPriceLabel.setText("1.99 $");
+        friesPriceLabel.setText("4.99 $");
 
         javax.swing.GroupLayout lunchPanelLayout = new javax.swing.GroupLayout(lunchPanel);
         lunchPanel.setLayout(lunchPanelLayout);
@@ -223,7 +229,7 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addComponent(friesStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)))
                         .addComponent(friesCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lunchPanelLayout.createSequentialGroup()
                         .addComponent(orangePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,9 +282,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         burgerLabel.setText("Burger");
 
+        burgerCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+
         burgerStockLabel.setText("Stock: ");
 
         ribsLabel.setText("Ribs");
+
+        ribsCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
         ribsStockLabel.setText("Stock: ");
 
@@ -286,9 +296,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         burgerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birgir.png"))); // NOI18N
 
-        burgerPriceLabel1.setText("1.99 $");
+        burgerPriceLabel1.setText("8.99 $");
 
-        ribsPriceLabel.setText("1.99 $");
+        ribsPriceLabel.setText("21.99 $");
 
         javax.swing.GroupLayout dinnerPanelLayout = new javax.swing.GroupLayout(dinnerPanel);
         dinnerPanel.setLayout(dinnerPanelLayout);
@@ -320,7 +330,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(dinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(burgerPriceLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ribsPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dinnerPanelLayout.setVerticalGroup(
             dinnerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,6 +369,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         exitButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         backLoginButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         backLoginButton.setText("Back");
@@ -372,28 +387,29 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(orderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(exitButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backLoginButton)
-                        .addGap(63, 63, 63))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(clientNameTiitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(exitButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backLoginButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(clientNameTiitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(27, 27, 27)
                     .addComponent(languageToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(661, Short.MAX_VALUE)))
+                    .addContainerGap(688, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,9 +421,9 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(orderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(84, 84, 84)
+                        .addComponent(orderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
                     .addComponent(backLoginButton))
@@ -437,6 +453,11 @@ public class MainMenu extends javax.swing.JFrame {
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backLoginButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,10 +495,6 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
-    private javax.swing.JButton backButton1;
-    private javax.swing.JButton backButton2;
-    private javax.swing.JButton backButton3;
     private javax.swing.JButton backLoginButton;
     private javax.swing.JPanel breakfastPanel;
     private javax.swing.JSpinner burgerCount;

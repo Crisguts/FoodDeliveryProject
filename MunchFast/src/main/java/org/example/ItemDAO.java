@@ -7,7 +7,7 @@ public class ItemDAO {
     private List<Item> items;
 
     /**
-     * The Menu is hardcoded
+     * The Menu is hard coded
      */
     public ItemDAO() {
         items = new ArrayList<>();

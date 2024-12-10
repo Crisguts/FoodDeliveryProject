@@ -3,12 +3,11 @@ package org.example;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnectivity {
-    public static final String url = "jdbc:sqlite:munchfastdatatest.db";
+    public static final String url = "jdbc:sqlite:munchfastdatatest6.db";
 
     /**
      * Connect to the database
@@ -27,49 +26,6 @@ public class DatabaseConnectivity {
     }
 
     /**
-     * The data is hard coded in the ItemDAO
-     */
-//    public static void createMenuTable() {
-//        String sql = "CREATE TABLE IF NOT EXISTS MENU (\n"
-//                + " ITEM_ID INTEGER PRIMARY KEY,\n"
-//                + " NAME TEXT NOT NULL, \n"
-//                + " PRICE DECIMAL, \n"
-//                + " QUANTITY INTEGER, \n"
-//                + " MENU_TYPE_ID INTEGER, \n"
-//                + " FOREIGN KEY (MENU_TYPE_ID) REFERENCES MENU_SCHEDULES (MENU_TYPE_ID)"
-//                + " );";
-//        try (Connection connection = connect();
-//             Statement statement = connection.createStatement()) {
-//            statement.execute(sql);
-//            System.out.println("Menu Schedule Table created successfully");
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
-
-    /**
-     * IDK ABT THIS ONE
-     * Create a Menu Schedule Table.
-     * This class contains the different menu types (breakfast, lunch, dinner)
-     * Each menu types have different time slots.
-     */
-//    public static void createMenuSchedulesTable() {
-//        String sql = "CREATE TABLE IF NOT EXISTS MENU_SCHEDULES (\n"
-//                + " MENU_TYPE_ID INTEGER PRIMARY KEY,\n"
-//                + " MENU_TYPE TEXT NOT NULL, \n"
-//                + " TIME_SLOT TIME"
-//                + " );";
-//        try (Connection connection = connect();
-//             Statement statement = connection.createStatement()) {
-//            statement.execute(sql);
-//            System.out.println("Menu Schedule Table created successfully");
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-
-    /**
      * Create a Customers table.
      */
     public static void createCustomersTable() {
@@ -79,7 +35,7 @@ public class DatabaseConnectivity {
                 + " L_NAME TEXT NOT NULL, \n"
                 + " EMAIL TEXT NOT NULL, \n"
                 + " PHONE_NUMBER TEXT NOT NULL, \n"
-                + " DELIVERY_ADDRESS TEXT NOT NULL \n"
+                + " DELIVER_ADDRESS TEXT \n"
                 + " );";
         // maybe add a check constraint for the allergy
         try (Connection connection = connect();
@@ -98,10 +54,9 @@ public class DatabaseConnectivity {
         String sql = "CREATE TABLE IF NOT EXISTS ORDERS (\n"
                 + " ORDER_ID INTEGER PRIMARY KEY, \n"
                 + " CUSTOMER_ID INTEGER, \n"
-                + " STATUS TEXT NOT NULL, \n"
-                + " DELIVERY_TIME INTEGER NOT NULL, \n"
+                + " STATUS TEXT NOT NULL DEFAULT 'ONGOING', \n"
                 + " FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID) \n"
-                + " CHECK (STATUS IN ('ONGOING', 'PENDING', 'DELIVERED'))"
+                + " CHECK (STATUS = 'ONGOING' OR STATUS = 'PENDING' OR STATUS = 'DELIVERED')"
                 + " );";
 
         // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER
@@ -137,7 +92,6 @@ public class DatabaseConnectivity {
             System.out.println(e.getMessage());
         }
     }
-
     /**
      * @param customer_id
      * @param f_name
@@ -165,73 +119,10 @@ public class DatabaseConnectivity {
         }
     }
 
-
-//(ITEM_ID, NAME, PRICE, QUANTITY, MENU_TYPE_ID)
-
-    /**
-     * Menu types ID:
-     * 1: Breakfast
-     * 2: Lunch
-     * 3: Dinner
-     */
-//    public static void addMenuItems() {
-//        String sql = "INSERT INTO MENU (ITEM_ID, NAME, PRICE, QUANTITY, MENU_TYPE_ID) VALUES " +
-//                "(1, 'Coffee', 3.50, 100, 1), " +
-//                "(2, 'Orange Juice', 5.99, 100, 1), " +
-//                "(3, 'Burger', 5.99, 100, 2), " +
-//                "(4, 'Ribs', 23.99, 100, 3), " +
-//                "(5, 'Rice', 6.50, 100, 3)," +
-//                "(6, 'Fries', 3.50, 100, 2);";
-//        try (Connection connection = connect();
-//             Statement stmt = connection.createStatement()) {
-//            stmt.executeUpdate(sql);
-//            System.out.println("Menu items inserted successfully.");
-//        } catch (SQLException e) {
-//            System.err.println("Error inserting hardcoded menu items data: " + e.getMessage());
-//        }
-//    }
-
-//    public static void addMenuSchedule() {
-//        String sql = "INSERT INTO MENU_SCHEDULES (MENU_TYPE_ID, MENU_TYPE,TIME_SLOT) VALUES " +
-//                "(1, 'Breakfast', '08:00:00'), " +
-//                "(2, 'Lunch', '12:00:00'), " +
-//                "(3, 'Dinner', '18:00:00'); ";
-//        try (Connection connection = connect();
-//             Statement stmt = connection.createStatement()) {
-//            stmt.executeUpdate(sql);
-//            System.out.println("Menu schedules inserted successfully.");
-//        } catch (SQLException e) {
-//            System.err.println("Error inserting hardcoded menu schedules data: " + e.getMessage());
-//        }
-//    }
-
-    /**
-     * View Menu (view the concrete item) of a Restaurant (by Type)
-     */
-    public static void viewMenu() {
-
-    }
-
-    /**
-     * Status updated
-     * Update this and do popup
-     */
-    public static void updateStatusByOrder() {
-
-    }
-
     public static void main(String[] args) {
-//
-//        createMenuTable();
-//        createMenuSchedulesTable();
         createOrdersTable();
         createOrderItemsTable();
         createCustomersTable();
-        //  addCustomer(5,"Flor","Ko","mail@.com","432 234 4322","Westisland");
-        // insert once
-//        addMenuItems();
-//        addMenuSchedule();
-
     }
 
 }

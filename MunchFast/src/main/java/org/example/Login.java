@@ -23,8 +23,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton viewAllBtn;
 
-    
     private CustomerController customerController;
+
     // private CustomerController customerController;
     /**
      * Creates new form Login
@@ -218,8 +218,10 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Welcome back!");
                     new MainMenu(customerController.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
                     this.dispose();
+                    return;
                 }
             }
+            JOptionPane.showMessageDialog(this, "You do not have Account with us!");
             new CreateUserForm().setVisible(true);
             this.dispose();
             return;
@@ -229,32 +231,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_login_createAcc_BtnActionPerformed
 
     private void viewAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllBtnActionPerformed
-          JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
+        JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
         textArea.setText("WILL BE ADDED LATER");
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setEditable(false); // Make the text area read-only           
-        
+
         JScrollPane scrollPane = new JScrollPane(textArea);
-            
-            JOptionPane optionPane = new JOptionPane(
-                     scrollPane,
-             JOptionPane.INFORMATION_MESSAGE,
-                  JOptionPane.DEFAULT_OPTION);
-            
-            JDialog dialog = optionPane.createDialog("Database Information");
-            dialog.setModalityType(Dialog.ModalityType.MODELESS);
-            dialog.setSize(700, 500);
-            dialog.setLocation(50,50);
-            dialog.setResizable(true);
-            
-            dialog.setVisible(true);
+
+        JOptionPane optionPane = new JOptionPane(
+                scrollPane,
+                JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION);
+
+        JDialog dialog = optionPane.createDialog("Database Information");
+        dialog.setModalityType(Dialog.ModalityType.MODELESS);
+        dialog.setSize(700, 500);
+        dialog.setLocation(50, 50);
+        dialog.setResizable(true);
+
+        dialog.setVisible(true);
     }//GEN-LAST:event_viewAllBtnActionPerformed
 
     private void languageToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageToggleActionPerformed
         if (languageToggle.getText().equals("English")) {
             languageToggle.setText("French");
-        } else languageToggle.setText("English");
+        } else
+            languageToggle.setText("English");
     }//GEN-LAST:event_languageToggleActionPerformed
     // End of variables declaration                   
 }

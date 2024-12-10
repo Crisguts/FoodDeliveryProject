@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class CreateUserForm extends javax.swing.JFrame {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton backButton;
     private javax.swing.JButton createAccButton;
     private javax.swing.JLabel createTitleLabel;
@@ -29,6 +29,9 @@ public class CreateUserForm extends javax.swing.JFrame {
     private javax.swing.JButton exitButton;
     private javax.swing.JToggleButton languageToggle;
     private javax.swing.JLabel logoLabel;
+    
+    // Customer Controller
+    CustomerController customerController;
 
     /**
      * Creates new form CreateUserForm
@@ -39,6 +42,7 @@ public class CreateUserForm extends javax.swing.JFrame {
         //load icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
+        customerController = new CustomerController();
     }
 
     /**
@@ -299,7 +303,8 @@ public class CreateUserForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please fill all the fields");
         } else {
             try {
-                Customer c = new Customer(fname, lname, email, phone, address);
+                // Controller adds the Customer (so it could be saved inside the Customers Table)
+                customerController.addCustomer(new Customer(fname, lname, email, phone, address));
                 JOptionPane.showMessageDialog(null, "Success! Welcome to Munch Fast, " + fname + " " + lname + ", please login with your email.");
                 new Login().setVisible(true);
                 this.dispose();
@@ -308,5 +313,5 @@ public class CreateUserForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_createAccButtonActionPerformed
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
