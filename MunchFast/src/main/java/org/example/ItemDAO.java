@@ -64,4 +64,14 @@ public class ItemDAO {
         return result.toString();
     }
 
+    public String getAllItemsAsString(List<Item> selectedItems) {
+        StringBuilder result = new StringBuilder();
+
+        for (Item item : selectedItems) {
+            result.append(item.toString()).append("\n");
+        }
+
+        return result.toString();
+    }
+
 }

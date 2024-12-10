@@ -102,7 +102,7 @@ public class OrderDAO {
      */
     public void addOrder(Order order) {
         String sql = "INSERT INTO ORDERS (ORDER_ID ,CUSTOMER_ID, STATUS) VALUES " +
-                "(?, ?, ?, ?);";
+                "(?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, order.getOrderId());

@@ -12,7 +12,7 @@ public class Order {
 
     // Constructor, the order id will be incremented by 1
     public Order(int customerId, String status) {
-        this.orderId = OrderDAO.LoadLastId();
+        this.orderId = OrderDAO.LoadLastId() + 1;
         this.customerId = customerId;
         this.status = status;
         this.items = new ArrayList<>();  

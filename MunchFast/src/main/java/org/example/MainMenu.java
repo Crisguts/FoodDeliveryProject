@@ -626,6 +626,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
         oc.addOrderItems(selectedItems, order.getOrderId());
+        oc.addOrder(order);
 
         DriverTask driverTask = new DriverTask();
         Thread driverThread = new Thread(driverTask);

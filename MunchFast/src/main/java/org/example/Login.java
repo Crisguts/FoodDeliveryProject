@@ -242,7 +242,7 @@ public class Login extends javax.swing.JFrame {
     //admin method to view whats going on in database
     private void viewAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllBtnActionPerformed
         JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
-        textArea.setText(customerController.getAllCustomersAsString() + "\n " + itemController.getAllItemsAsString()+ "\n ");
+        textArea.setText(customerController.getAllCustomersAsString() + "\n");
 //        textArea.setText();
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);

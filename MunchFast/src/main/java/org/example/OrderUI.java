@@ -5,6 +5,7 @@
 package org.example;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * @author 22cri
@@ -13,6 +14,7 @@ public class OrderUI extends javax.swing.JFrame {
 
     Customer current;
     OrderController oc = new OrderController();
+    ItemController itemController = new ItemController();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backMenuButton;
     private javax.swing.JButton exitButton;
@@ -29,7 +31,10 @@ public class OrderUI extends javax.swing.JFrame {
     public OrderUI(Customer c) {
         current = c;
         initComponents();
-        visualizeClientOrder.setText(oc.getOrdersByCustomer(c.getId()).toString());
+
+        List<Order> orders = oc.getOrdersByCustomer(c.getId());
+//    public String getAllItemsAsString(List<Item> selectedItems) {
+        visualizeClientOrder.setText(orders.toString());
         //load icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
