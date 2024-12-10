@@ -30,6 +30,9 @@ public class CreateUserForm extends javax.swing.JFrame {
     private javax.swing.JToggleButton languageToggle;
     private javax.swing.JLabel logoLabel;
 
+
+    private CustomerController customerController;
+
     /**
      * Creates new form CreateUserForm
      */
@@ -39,6 +42,8 @@ public class CreateUserForm extends javax.swing.JFrame {
         //load icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
+        // Initialize the CustomerController() to handle operations (create, read, delete...)
+        customerController = new CustomerController();
     }
 
     /**
@@ -300,6 +305,7 @@ public class CreateUserForm extends javax.swing.JFrame {
         } else {
             try {
                 Customer c = new Customer(fname, lname, email, phone, address);
+                customerController.addCustomer(c);
                 JOptionPane.showMessageDialog(null, "Success! Welcome to Munch Fast, " + fname + " " + lname + ", please login with your email.");
                 new Login().setVisible(true);
                 this.dispose();
