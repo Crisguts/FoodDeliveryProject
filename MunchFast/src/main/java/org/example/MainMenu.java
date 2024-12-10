@@ -637,9 +637,10 @@ public class MainMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_orderButtonActionPerformed
 
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt){
-    this.dispose();}
-    
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose();
+    }
+
     private void backLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backLoginButtonActionPerformed
         new Login().setVisible(true);
         this.dispose();
