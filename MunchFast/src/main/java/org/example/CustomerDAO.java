@@ -5,51 +5,95 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO {
-    private Connection connection;
+    private static Connection connection;
 
     public CustomerDAO() {
         connection = DatabaseConnectivity.connect();
     }
 
-    // this method is called when controller added a customer
-    public static void addCustomer(int customer_id, String f_name, String l_name, String email, String phone_number
-            , String delivery_address) {
+    /**
+     * id = getId() ...
+     * this method is called when controller added a customer
+     *
+     * @param customer
+     */
+    public void addCustomer(Customer customer) {
         String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES " +
-                "(?, ?, ?, ?, ?, ? )";
+                "(?, ?, ?, ?, ?, ?);";
 
-        try (Connection connection = DatabaseConnectivity.connect();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, customer_id);
-            preparedStatement.setString(2, f_name);
-            preparedStatement.setString(3, l_name);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, phone_number);
-            preparedStatement.setString(6, delivery_address);
-            preparedStatement.execute();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, customer.getId());
+            preparedStatement.setString(2, customer.getFirstName());
+            preparedStatement.setString(3, customer.getLastName());
+            preparedStatement.setString(4, customer.getEmail());
+            preparedStatement.setString(5, customer.getPhone());
+            preparedStatement.setString(6, customer.getDeliveryAddress());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Caught SQLException inside the addCustomer()" + e.getMessage());
         }
     }
 
-    // Method to get a customer by email (e.g., for login)
-    public static Customer getCustomerByEmail(String email) {
+    /**
+     * Delete Customer
+     *
+     * @param customerId
+     */
+    public boolean deleteCustomer(int customerId) {
+        // check if the customer exists
+        String sql = "DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = ?;";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, customerId);
+
+            int rowAffected = preparedStatement.executeUpdate();
+
+            if (rowAffected > 0) {
+                System.out.println("Customer with ID " + customerId + " was successfully deleted.");
+                return true;
+            } else {
+                System.out.println("No customer found with ID " + customerId + ". Deletion not performed.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Caught SQLException inside the deleteCustomer()" + e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * Method to get a customer by email (e.g., for login)
+     *
+     * @param email
+     * @return
+     */
+    public Customer getCustomerByEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            System.err.println("Email cannot be null or empty");
+            return null;
+        }
+
         String sql = "SELECT * FROM CUSTOMERS WHERE EMAIL = ?";
         Customer customer = null;
 
-        try (Connection connection = DatabaseConnectivity.connect();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, email);
 
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                customer = new Customer(
-                        rs.getString("F_NAME"),
-                        rs.getString("L_NAME"),
-                        rs.getString("EMAIL"),
-                        rs.getString("PHONE_NUMBER"),
-                        rs.getString("DELIVER_ADDRESS")
-                );
-                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    customer = new Customer(
+                            rs.getString("F_NAME"),
+                            rs.getString("L_NAME"),
+                            rs.getString("EMAIL"),
+                            rs.getString("PHONE_NUMBER"),
+                            rs.getString("DELIVER_ADDRESS")
+                    );
+                    customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the database-generated ID
+                } else {
+                    System.out.println("No customer found with email: " + email);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Error fetching customer by email: " + e.getMessage());
@@ -57,13 +101,48 @@ public class CustomerDAO {
         return customer;
     }
 
-    // Method to get all customers from the database
-    public static List<Customer> getAllCustomers() {
+    /**
+     * Get the customer by their ID
+     *
+     * @param id
+     * @return
+     */
+    public Customer getCustomerById(int id) {
+        String sql = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = ?;";
+        Customer customer = null;
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    customer = new Customer(
+
+                            rs.getString("F_NAME"),
+                            rs.getString("L_NAME"),
+                            rs.getString("EMAIL"),
+                            rs.getString("PHONE_NUMBER"),
+                            rs.getString("DELIVERY_ADDRESS")
+                    );
+                    customer.setCustomerId( rs.getInt("CUSTOMER_ID"));
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error fetching the customer by its ID: " + e.getMessage());
+        }
+        return customer;
+    }
+
+    /**
+     * Method to get all customers from the database
+     *
+     * @return
+     */
+    public List<Customer> getAllCustomers() {
         String sql = "SELECT * FROM CUSTOMERS";
         List<Customer> customers = new ArrayList<>();
 
-        try (Connection connection = DatabaseConnectivity.connect();
-             Statement stmt = connection.createStatement()) {
+        try (Statement stmt = connection.createStatement()) {
 
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

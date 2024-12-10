@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnectivity {
-    public static final String url = "jdbc:sqlite:munchdatatest.db";
+    public static final String url = "jdbc:sqlite:munchfastdatatest.db";
 
     /**
      * Connect to the database
@@ -29,23 +29,23 @@ public class DatabaseConnectivity {
     /**
      * The data is hardcoded in the ItemDAO
      */
-    public static void createMenuTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS MENU (\n"
-                + " ITEM_ID INTEGER PRIMARY KEY,\n"
-                + " NAME TEXT NOT NULL, \n"
-                + " PRICE DECIMAL, \n"
-                + " QUANTITY INTEGER, \n"
-                + " MENU_TYPE_ID INTEGER, \n"
-                + " FOREIGN KEY (MENU_TYPE_ID) REFERENCES MENU_SCHEDULES (MENU_TYPE_ID)"
-                + " );";
-        try (Connection connection = connect();
-             Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Menu Schedule Table created successfully");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void createMenuTable() {
+//        String sql = "CREATE TABLE IF NOT EXISTS MENU (\n"
+//                + " ITEM_ID INTEGER PRIMARY KEY,\n"
+//                + " NAME TEXT NOT NULL, \n"
+//                + " PRICE DECIMAL, \n"
+//                + " QUANTITY INTEGER, \n"
+//                + " MENU_TYPE_ID INTEGER, \n"
+//                + " FOREIGN KEY (MENU_TYPE_ID) REFERENCES MENU_SCHEDULES (MENU_TYPE_ID)"
+//                + " );";
+//        try (Connection connection = connect();
+//             Statement statement = connection.createStatement()) {
+//            statement.execute(sql);
+//            System.out.println("Menu Schedule Table created successfully");
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
 
     /**
@@ -54,20 +54,20 @@ public class DatabaseConnectivity {
      * This class contains the different menu types (breakfast, lunch, dinner)
      * Each menu types have different time slots.
      */
-    public static void createMenuSchedulesTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS MENU_SCHEDULES (\n"
-                + " MENU_TYPE_ID INTEGER PRIMARY KEY,\n"
-                + " MENU_TYPE TEXT NOT NULL, \n"
-                + " TIME_SLOT TIME"
-                + " );";
-        try (Connection connection = connect();
-             Statement statement = connection.createStatement()) {
-            statement.execute(sql);
-            System.out.println("Menu Schedule Table created successfully");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void createMenuSchedulesTable() {
+//        String sql = "CREATE TABLE IF NOT EXISTS MENU_SCHEDULES (\n"
+//                + " MENU_TYPE_ID INTEGER PRIMARY KEY,\n"
+//                + " MENU_TYPE TEXT NOT NULL, \n"
+//                + " TIME_SLOT TIME"
+//                + " );";
+//        try (Connection connection = connect();
+//             Statement statement = connection.createStatement()) {
+//            statement.execute(sql);
+//            System.out.println("Menu Schedule Table created successfully");
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     /**
      * Create a Customers table.
@@ -101,6 +101,7 @@ public class DatabaseConnectivity {
                 + " STATUS TEXT NOT NULL, \n"
                 + " DELIVERY_TIME INTEGER NOT NULL, \n"
                 + " FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID) \n"
+                + " CHECK (STATUS IN ('ONGOING', 'PENDING', 'DELIVERED'))"
                 + " );";
 
         // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER
@@ -114,15 +115,16 @@ public class DatabaseConnectivity {
         }
     }
 
-    // Stores the items in each order.
+    /**
+     * Stores the items in each order.
+     * Item_ID is not a foreign key since
+     */
     public static void createOrderItemsTable() {
         String sql = "CREATE TABLE IF NOT EXISTS ORDER_ITEMS (\n"
-                + " ORDER_ITEM_ID INTEGER PRIMARY KEY, \n"
                 + " ORDER_ID INTEGER, \n"
                 + " ITEM_ID INTEGER, \n"
                 + " QUANTITY INTEGER, \n"
-                + " FOREIGN KEY (ORDER_ID) REFERENCES ORDERS (ORDER_ID),\n"
-                + " FOREIGN KEY (ITEM_ID) REFERENCES MENU(ITEM_ID)"
+                + " FOREIGN KEY (ORDER_ID) REFERENCES ORDERS (ORDER_ID)\n"
                 + " );";
 
         // DELIVERY_TIME ARE MEASURED IN MINUTES, HENCE WHY IT'S AN INTEGER
@@ -172,36 +174,36 @@ public class DatabaseConnectivity {
      * 2: Lunch
      * 3: Dinner
      */
-    public static void addMenuItems() {
-        String sql = "INSERT INTO MENU (ITEM_ID, NAME, PRICE, QUANTITY, MENU_TYPE_ID) VALUES " +
-                "(1, 'Coffee', 3.50, 100, 1), " +
-                "(2, 'Orange Juice', 5.99, 100, 1), " +
-                "(3, 'Burger', 5.99, 100, 2), " +
-                "(4, 'Ribs', 23.99, 100, 3), " +
-                "(5, 'Rice', 6.50, 100, 3)," +
-                "(6, 'Fries', 3.50, 100, 2);";
-        try (Connection connection = connect();
-             Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate(sql);
-            System.out.println("Menu items inserted successfully.");
-        } catch (SQLException e) {
-            System.err.println("Error inserting hardcoded menu items data: " + e.getMessage());
-        }
-    }
+//    public static void addMenuItems() {
+//        String sql = "INSERT INTO MENU (ITEM_ID, NAME, PRICE, QUANTITY, MENU_TYPE_ID) VALUES " +
+//                "(1, 'Coffee', 3.50, 100, 1), " +
+//                "(2, 'Orange Juice', 5.99, 100, 1), " +
+//                "(3, 'Burger', 5.99, 100, 2), " +
+//                "(4, 'Ribs', 23.99, 100, 3), " +
+//                "(5, 'Rice', 6.50, 100, 3)," +
+//                "(6, 'Fries', 3.50, 100, 2);";
+//        try (Connection connection = connect();
+//             Statement stmt = connection.createStatement()) {
+//            stmt.executeUpdate(sql);
+//            System.out.println("Menu items inserted successfully.");
+//        } catch (SQLException e) {
+//            System.err.println("Error inserting hardcoded menu items data: " + e.getMessage());
+//        }
+//    }
 
-    public static void addMenuSchedule() {
-        String sql = "INSERT INTO MENU_SCHEDULES (MENU_TYPE_ID, MENU_TYPE,TIME_SLOT) VALUES " +
-                "(1, 'Breakfast', '08:00:00'), " +
-                "(2, 'Lunch', '12:00:00'), " +
-                "(3, 'Dinner', '18:00:00'); ";
-        try (Connection connection = connect();
-             Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate(sql);
-            System.out.println("Menu schedules inserted successfully.");
-        } catch (SQLException e) {
-            System.err.println("Error inserting hardcoded menu schedules data: " + e.getMessage());
-        }
-    }
+//    public static void addMenuSchedule() {
+//        String sql = "INSERT INTO MENU_SCHEDULES (MENU_TYPE_ID, MENU_TYPE,TIME_SLOT) VALUES " +
+//                "(1, 'Breakfast', '08:00:00'), " +
+//                "(2, 'Lunch', '12:00:00'), " +
+//                "(3, 'Dinner', '18:00:00'); ";
+//        try (Connection connection = connect();
+//             Statement stmt = connection.createStatement()) {
+//            stmt.executeUpdate(sql);
+//            System.out.println("Menu schedules inserted successfully.");
+//        } catch (SQLException e) {
+//            System.err.println("Error inserting hardcoded menu schedules data: " + e.getMessage());
+//        }
+//    }
 
     /**
      * View Menu (view the concrete item) of a Restaurant (by Type)
@@ -219,9 +221,9 @@ public class DatabaseConnectivity {
     }
 
     public static void main(String[] args) {
-
-        createMenuTable();
-        createMenuSchedulesTable();
+//
+//        createMenuTable();
+//        createMenuSchedulesTable();
         createOrdersTable();
         createOrderItemsTable();
         createCustomersTable();

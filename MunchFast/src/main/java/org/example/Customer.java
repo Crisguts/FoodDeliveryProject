@@ -14,7 +14,6 @@ public class Customer {
     private String lastName;
     private String email;
     private String phone;
-    @lombok.Setter
     private String deliveryAddress;
 
     /**
@@ -217,5 +216,7 @@ public class Customer {
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
+
+
 
 }
