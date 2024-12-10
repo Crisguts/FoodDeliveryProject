@@ -131,6 +131,8 @@ public class CustomerDAO {
 
         } catch (SQLException e) {
             System.err.println("Error fetching the customer by its ID: " + e.getMessage());
+        } catch (InvalidArgumentException iae){
+            System.err.println("Invalid ");
         }
         return customer;
     }

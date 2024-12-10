@@ -23,6 +23,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton viewAllBtn;
 
+    
+    private CustomerController customerController;
+    // private CustomerController customerController;
     /**
      * Creates new form Login
      */
@@ -33,6 +36,8 @@ public class Login extends javax.swing.JFrame {
         //load icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
+        // Initialize the CustomerController() to handle operations (create, read, delete...)
+        customerController = new CustomerController();
     }
 
     /**
@@ -205,13 +210,13 @@ public class Login extends javax.swing.JFrame {
     private void login_createAcc_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_createAcc_BtnActionPerformed
         if (!emailTxtBox.getText().isEmpty()) {
             //get client list from model
-            List<Customer> clients = CustomerDAO.getAllCustomers();
+            List<Customer> clients = customerController.getAllCustomers();
             //go through list and compare the text to the email data member
             for (Customer c : clients) {
                 if (c.getEmail().equals(emailTxtBox.getText())) {
                     // if found then open new form and dispose this one (add a confirmation message
                     JOptionPane.showMessageDialog(this, "Welcome back!");
-                    new MainMenu(CustomerDAO.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
+                    new MainMenu(customerController.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
                     this.dispose();
                 }
             }

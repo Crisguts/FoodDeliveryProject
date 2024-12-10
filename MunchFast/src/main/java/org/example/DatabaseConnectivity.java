@@ -27,7 +27,7 @@ public class DatabaseConnectivity {
     }
 
     /**
-     * The data is hardcoded in the ItemDAO
+     * The data is hard coded in the ItemDAO
      */
 //    public static void createMenuTable() {
 //        String sql = "CREATE TABLE IF NOT EXISTS MENU (\n"
