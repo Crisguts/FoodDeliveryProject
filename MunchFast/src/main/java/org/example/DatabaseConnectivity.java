@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnectivity {
-    public static final String url = "jdbc:sqlite:munchfastdatatest6.db";
+    public static final String url = "jdbc:sqlite:munchfastdatatest7.db";
 
     /**
      * Connect to the database

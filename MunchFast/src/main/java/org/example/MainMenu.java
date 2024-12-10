@@ -347,7 +347,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(friesPictureLabel)
                         .addGap(18, 18, 18)
                         .addComponent(friesPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
+                .addGap(35, 35, 35)));
                 lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(lunchPanelLayout.createSequentialGroup()
                                 .addGap(47, 47, 47)
@@ -376,8 +376,7 @@ public class MainMenu extends javax.swing.JFrame {
                                                 .addComponent(friesPictureLabel)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(friesPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                        .addGap(35, 35, 35))
-        );
+                                                        .addGap(35, 35, 35));
         lunchPanelLayout.setVerticalGroup(
                 lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(lunchPanelLayout.createSequentialGroup()
@@ -585,6 +584,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_languageToggleActionPerformed
 
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
+        Order order = new Order(1, "ONGOING");
+
+        DriverTask driverTask = new DriverTask();
+        Thread driverthread = new Thread(driverTask);
+        driverthread.start();
+
+        DriverTask.takeOrder(order);
+
 
     }//GEN-LAST:event_orderButtonActionPerformed
 

@@ -17,7 +17,8 @@ public class OrderDAO {
      */
      public static int LoadLastId() {
         String sql = "SELECT MAX(ORDER_ID) AS MAX_ID FROM ORDERS;";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
             if (rs.next()) {
                 return rs.getInt("MAX_ID");
             }
@@ -75,6 +76,25 @@ public class OrderDAO {
     return order;
 }
 
+    public static void updateStatusToPending(int id){
+        String sql = "UPDATE ORDERS SET STATUS = 'PENDING' WHERE ORDER_ID = ?;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error updating the status to PENDING: " + e.getMessage());
+        }
+    }
+
+    public static void updateStatusToDelivered(int id){
+        String sql = "UPDATE ORDERS SET STATUS = 'DELIVERED' WHERE ORDER_ID = ?;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error updating the status to Delivered: " + e.getMessage());
+        }
+    }
 
     /**
      * Add a new Order
