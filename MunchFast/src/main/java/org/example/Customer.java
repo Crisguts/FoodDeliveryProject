@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 public class Customer {
 
-    private static int counter = 1;
     private int id;
     private String firstName;
     private String lastName;
@@ -25,12 +24,12 @@ public class Customer {
      * @param deliveryAddress
      */
     public Customer(String firstName, String lastName, String email, String phoneNumber, String deliveryAddress) throws InvalidArgumentException {
-        this.id = counter++; // Auto-increment customer ID
+        this.id = CustomerDAO.LoadLastId(); // Auto-increment customer ID
         validateAndSetName(firstName, 'R');
         validateAndSetName(lastName, 'L');
         validateAndSetEmail(email);
         validateSetAndFormatPhone(phoneNumber);
-        validateAddress(deliveryAddress);
+        validateAndSetAddress(deliveryAddress);
     }
 
     /**
@@ -91,8 +90,8 @@ public class Customer {
             return false; //if null false
         }
         String[] elements = address.split(" ");
-        if (elements.length < 1) {
-            return false; // if not at least 2 words, then return false.
+        if (elements.length < 2) {
+            return false; // if not at least 2 par, then return false.
         }
         //first part must be number
         char[] houseNb = elements[0].toCharArray();
@@ -115,6 +114,7 @@ public class Customer {
         if (!validateAddress(address)) {
             throw new InvalidArgumentException("Invalid adress format.Valid ex: 123 Elm street");
         }
+        this.deliveryAddress = address;
     }
 
     /**

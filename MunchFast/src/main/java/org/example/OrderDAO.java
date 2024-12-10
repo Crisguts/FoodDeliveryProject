@@ -10,9 +10,27 @@ public class OrderDAO {
     public OrderDAO() {
         connection = DatabaseConnectivity.connect();
     }
+    
+    /**
+     * GET THE HIGHEST ID IN THE TABLE 
+     * @return 
+     */
+     public static int LoadLastId() {
+        String sql = "SELECT MAX(ORDER_ID) AS MAX_ID FROM ORDERS;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("MAX_ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error loading last ID: " + e.getMessage());
+        }
+        return 0; // Default ID if the table is empty
+    }
 
     /**
      * Linked Table Between Order and Item
+     * Since Item is hard coded, retrieving the ITEM_ID using the ItemDAO
      * @param orderId
      * @param items
      */
@@ -22,7 +40,7 @@ public class OrderDAO {
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             for (Item item : items) {
                 pstmt.setInt(1, orderId);
-                pstmt.setInt(2, item.getItemId());
+                pstmt.setInt(2, item.getItemId()); //Use ITEM_ID from the hardcoded data
                 pstmt.setInt(3, item.getStock());
                 pstmt.executeUpdate();
             }
@@ -31,21 +49,65 @@ public class OrderDAO {
             System.err.println("Error adding order items: " + e.getMessage());
         }
     }
+    
+    public Order getOrderWithItems(int orderId) {
+    String sql = "SELECT ITEM_ID, QUANTITY FROM ORDER_ITEMS WHERE ORDER_ID = ?";
+    Order order = null;
 
+    try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        pstmt.setInt(1, orderId);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            ItemDAO itemDAO = new ItemDAO(); // Use the hardcoded data
+            order = new Order(orderId, "ONGOING"); // Initialize order with placeholders
+
+            while (rs.next()) {
+                int itemId = rs.getInt("ITEM_ID");
+                int quantity = rs.getInt("QUANTITY");
+                Item item = itemDAO.getItemById(itemId); // Fetch from hardcoded list
+                if (item != null) {
+                    order.addItem(item, quantity);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Error fetching order with items: " + e.getMessage());
+    }
+
+    return order;
+}
+
+    public static void updateStatusToPending(int id){
+        String sql = "UPDATE ORDERS SET STATUS = 'PENDING' WHERE ORDER_ID = ?;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error updating the status to PENDING: " + e.getMessage());
+        }
+    }
+
+    public static void updateStatusToDelivered(int id){
+        String sql = "UPDATE ORDERS SET STATUS = 'DELIVERED' WHERE ORDER_ID = ?;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error updating the status to Delivered: " + e.getMessage());
+        }
+    }
 
     /**
      * Add a new Order
      * @param order
      */
     public void addOrder(Order order) {
-        String sql = "INSERT INTO ORDERS (ORDER_ID ,CUSTOMER_ID, STATUS, DELIVERY_TIME) VALUES " +
+        String sql = "INSERT INTO ORDERS (ORDER_ID ,CUSTOMER_ID, STATUS) VALUES " +
                 "(?, ?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, order.getOrderId());
             preparedStatement.setInt(2, order.getCustomerId());
             preparedStatement.setString(3, order.getStatus());
-            preparedStatement.setInt(4, order.getDeliveryTime());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Caught SQLException inside the addCustomer()" + e.getMessage());
@@ -94,8 +156,7 @@ public class OrderDAO {
                 if (rs.next()) {
                     order = new Order(
                             rs.getInt("CUSTOMER_ID"),
-                            rs.getString("STATUS"),
-                            rs.getInt("DELIVER_TIME")
+                            rs.getString("STATUS")
                     );
                     order.setOrderId(rs.getInt("ORDER_ID"));
                 }
@@ -122,8 +183,7 @@ public class OrderDAO {
                 while (rs.next()) {
                     Order order = new Order(
                             rs.getInt("CUSTOMER_ID"),
-                            rs.getString("STATUS"),
-                            rs.getInt("DELIVER_TIME")
+                            rs.getString("STATUS")
                     );
                     order.setOrderId(rs.getInt("ORDER_ID"));
                     orders.add(order);
@@ -150,8 +210,7 @@ public class OrderDAO {
             while (rs.next()) {
                 Order order = new Order(
                         rs.getInt("CUSTOMER_ID"),
-                        rs.getString("STATUS"),
-                        rs.getInt("DELIVER_TIME")
+                        rs.getString("STATUS")
                 );
                 order.setOrderId(rs.getInt("ORDER_ID"));
                 orders.add(order);

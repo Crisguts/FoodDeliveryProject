@@ -49,6 +49,16 @@ public class OrderController {
         return orderDAO.getOrdersById(orderId);
     }
 
+
+    public void updateStatusToPending(int id) {
+        OrderDAO.updateStatusToPending(id);
+    }
+
+
+    public void updateStatusToDelivered(int id) {
+        OrderDAO.updateStatusToDelivered(id);
+    }
+
     /**
      * Retrieve Order by Customer ID (can retrieve multiple orders)
      *

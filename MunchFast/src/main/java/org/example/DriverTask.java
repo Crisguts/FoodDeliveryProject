@@ -8,6 +8,7 @@ public class DriverTask implements Runnable {
 
     private static final BlockingQueue<Order> orderQueue = new LinkedBlockingQueue<>(1);
     private static boolean isAvailable = true;
+    OrderController orderController = new OrderController();
 
     public static void takeOrder(Order order) {
         try {
@@ -39,8 +40,10 @@ public class DriverTask implements Runnable {
 
     private void processOrder(Order order) {
         try {
+            orderController.updateStatusToPending(order.getOrderId());
             JOptionPane.showMessageDialog(null, "Driver delivering " + order.getOrderId());
             Thread.sleep(60000);
+            orderController.updateStatusToDelivered(order.getOrderId());
             JOptionPane.showMessageDialog(null, "Driver delivered " + order.getOrderId());
             isAvailable = true;
         } catch (InterruptedException e) {

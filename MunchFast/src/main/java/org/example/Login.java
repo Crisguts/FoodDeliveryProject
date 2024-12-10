@@ -25,9 +25,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton viewAllBtn;
 
-
     private ResourceBundle bundle;
     private CustomerController customerController;
+
     // private CustomerController customerController;
 
     /**
@@ -225,8 +225,10 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Welcome back!");
                     new MainMenu(customerController.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
                     this.dispose();
+                    return;
                 }
             }
+            JOptionPane.showMessageDialog(this, "You do not have Account with us!");
             new CreateUserForm().setVisible(true);
             this.dispose();
             return;
@@ -282,7 +284,8 @@ public class Login extends javax.swing.JFrame {
         } else {
             loadLanguage("en");
             languageToggle.setText("French");
-        }
+        } 
+
     }//GEN-LAST:event_languageToggleActionPerformed
     // End of variables declaration                   
 }

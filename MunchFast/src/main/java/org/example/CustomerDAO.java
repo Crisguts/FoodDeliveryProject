@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO {
+
     private static Connection connection;
 
     public CustomerDAO() {
@@ -12,25 +13,84 @@ public class CustomerDAO {
     }
 
     /**
-     * id = getId() ...
-     * this method is called when controller added a customer
+     * GET THE HIGHEST ID IN THE TABLE 
+     * @return 
+     */
+    public static int LoadLastId() {
+        String sql = "SELECT MAX(CUSTOMER_ID) AS MAX_ID FROM CUSTOMERS;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("MAX_ID");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error loading last ID: " + e.getMessage());
+        }
+        return 0; // Default ID if the table is empty
+    }
+
+    /**
+     * Get last customer from the Customer Table
+     *
+     * @return
+     */
+    public static Customer getLastCustomer() {
+        String sql = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = (SELECT MAX(CUSTOMER_ID) FROM CUSTOMERS);";
+        Customer customer = null;
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                customer = new Customer(
+                        rs.getString("F_NAME"),
+                        rs.getString("L_NAME"),
+                        rs.getString("EMAIL"),
+                        rs.getString("PHONE_NUMBER"),
+                        rs.getString("DELIVER_ADDRESS")
+                );
+                customer.setCustomerId(rs.getInt("CUSTOMER_ID")); // Set the ID
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching last customer: " + e.getMessage());
+            return null;
+        } catch (InvalidArgumentException iae) {
+            System.err.println("Error fetching last customer: " + iae.getMessage());
+            return null;
+        }
+
+        return customer;
+    }
+
+    /**
+     * id = getId() ... this method is called when controller added a customer
      *
      * @param customer
      */
     public void addCustomer(Customer customer) {
-        String sql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES " +
-                "(?, ?, ?, ?, ?, ?);";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, customer.getId());
-            preparedStatement.setString(2, customer.getFirstName());
-            preparedStatement.setString(3, customer.getLastName());
-            preparedStatement.setString(4, customer.getEmail());
-            preparedStatement.setString(5, customer.getPhone());
-            preparedStatement.setString(6, customer.getDeliveryAddress());
-            preparedStatement.executeUpdate();
+        String getMaxIdSql = "SELECT MAX(CUSTOMER_ID) AS MAX_ID FROM CUSTOMERS";
+        String insertSql = "INSERT INTO CUSTOMERS (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, PHONE_NUMBER, DELIVER_ADDRESS) VALUES (?, ?, ?, ?, ?, ?);";
+
+        try (PreparedStatement getIdStmt = connection.prepareStatement(getMaxIdSql); ResultSet rs = getIdStmt.executeQuery()) {
+
+            int nextId = 1; // Default ID for the first customer
+            if (rs.next()) {
+                nextId = rs.getInt("MAX_ID") + 1; // Increment the max ID
+            }
+
+            try (PreparedStatement insertStmt = connection.prepareStatement(insertSql)) {
+                insertStmt.setInt(1, nextId); // Use the generated ID
+                insertStmt.setString(2, customer.getFirstName());
+                insertStmt.setString(3, customer.getLastName());
+                insertStmt.setString(4, customer.getEmail());
+                insertStmt.setString(5, customer.getPhone());
+                insertStmt.setString(6, customer.getDeliveryAddress());
+                insertStmt.executeUpdate();
+            }
+
+            customer.setCustomerId(nextId); // Update the customer object with the generated ID
+
         } catch (SQLException e) {
-            System.err.println("Caught SQLException inside the addCustomer()" + e.getMessage());
+            System.err.println("Error adding customer: " + e.getMessage());
         }
     }
 
@@ -118,20 +178,19 @@ public class CustomerDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     customer = new Customer(
-
                             rs.getString("F_NAME"),
                             rs.getString("L_NAME"),
                             rs.getString("EMAIL"),
                             rs.getString("PHONE_NUMBER"),
-                            rs.getString("DELIVERY_ADDRESS")
+                            rs.getString("DELIVER_ADDRESS")
                     );
-                    customer.setCustomerId( rs.getInt("CUSTOMER_ID"));
+                    customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
                 }
             }
 
         } catch (SQLException e) {
             System.err.println("Error fetching the customer by its ID: " + e.getMessage());
-        } catch (InvalidArgumentException iae){
+        } catch (InvalidArgumentException iae) {
             System.err.println("Invalid ");
         }
         return customer;

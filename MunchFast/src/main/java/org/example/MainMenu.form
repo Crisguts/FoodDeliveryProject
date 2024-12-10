@@ -23,33 +23,36 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="menuPanel" min="-2" pref="553" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="orderButton" min="-2" pref="149" max="-2" attributes="0"/>
-                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="exitButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="backLoginButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="menuPanel" min="-2" pref="553" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="orderButton" pref="226" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="exitButton" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="backLoginButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="clientNameTiitleLabel" min="-2" pref="292" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="clientNameTiitleLabel" min="-2" pref="292" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="languageToggle" min="-2" pref="106" max="-2" attributes="0"/>
-                  <EmptySpace pref="661" max="32767" attributes="0"/>
+                  <EmptySpace pref="688" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -60,16 +63,16 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="clientNameTiitleLabel" min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="menuPanel" min="-2" pref="287" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                      <Component id="orderButton" min="-2" pref="120" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="orderButton" min="-2" pref="146" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="7" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="backLoginButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -167,7 +170,7 @@
                           <Component id="coffeePriceLabel" min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="ricePriceLabel" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -229,6 +232,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="coffeeCount">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="coffeeStockLabel">
               <Properties>
@@ -241,6 +249,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="riceCount">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="riceStockLabel">
               <Properties>
@@ -268,7 +281,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="ricePriceLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1.99 $"/>
+                <Property name="text" type="java.lang.String" value="3.99 $"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -308,7 +321,7 @@
                               <Component id="friesCount" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="50" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="orangePictureLabel" min="-2" pref="131" max="-2" attributes="0"/>
@@ -383,6 +396,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="orangeCount2">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="orangeStockLabel2">
               <Properties>
@@ -397,7 +415,7 @@
             <Component class="javax.swing.JSpinner" name="friesCount">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="20" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
@@ -427,7 +445,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="friesPriceLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1.99 $"/>
+                <Property name="text" type="java.lang.String" value="4.99 $"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -478,7 +496,7 @@
                           <Component id="burgerPriceLabel1" min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="ribsPriceLabel" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -525,6 +543,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="burgerCount">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="burgerStockLabel">
               <Properties>
@@ -537,6 +560,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="ribsCount">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="ribsStockLabel">
               <Properties>
@@ -559,12 +587,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="burgerPriceLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1.99 $"/>
+                <Property name="text" type="java.lang.String" value="8.99 $"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="ribsPriceLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="1.99 $"/>
+                <Property name="text" type="java.lang.String" value="21.99 $"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -586,6 +614,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backLoginButton">
       <Properties>
