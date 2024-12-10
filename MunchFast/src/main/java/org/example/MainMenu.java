@@ -5,6 +5,7 @@
 package org.example;
 
 import javax.swing.*;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 /**
@@ -15,55 +16,59 @@ public class MainMenu extends javax.swing.JFrame {
     Customer current;
     private ResourceBundle bundle;
     // Variables declaration - do not modify                     
-//    private javax.swing.JButton backButton;
-//    private javax.swing.JButton backButton1;
-//    private javax.swing.JButton backButton2;
-//    private javax.swing.JButton backButton3;
-//    private javax.swing.JButton backLoginButton;
-//    private javax.swing.JPanel breakfastPanel;
-//    private javax.swing.JSpinner burgerCount;
-//    private javax.swing.JLabel burgerLabel;
-//    private javax.swing.JLabel burgerPictureLabel;
-//    private javax.swing.JLabel burgerPriceLabel1;
-//    private javax.swing.JLabel burgerStockLabel;
-//    private javax.swing.JLabel clientNameTiitleLabel;
-//    private javax.swing.JSpinner coffeeCount;
-//    private javax.swing.JLabel coffeeLabel;
-//    private javax.swing.JLabel coffeePictureLabel;
-//    private javax.swing.JLabel coffeePriceLabel;
-//    private javax.swing.JLabel coffeeStockLabel;
-//    private javax.swing.JPanel dinnerPanel;
-//    private javax.swing.JButton exitButton;
-//    private javax.swing.JSpinner friesCount;
-//    private javax.swing.JLabel friesLabel;
-//    private javax.swing.JLabel friesPictureLabel;
-//    private javax.swing.JLabel friesPriceLabel;
-//    private javax.swing.JLabel friesStockLabel;
-//    private javax.swing.JToggleButton languageToggle;
-//    private javax.swing.JPanel lunchPanel;
-//    private javax.swing.JTabbedPane menuPanel;
-//    private javax.swing.JSpinner orangeCount2;
-//    private javax.swing.JLabel orangeLabel2;
-//    private javax.swing.JLabel orangePictureLabel;
-//    private javax.swing.JLabel orangePriceLabel;
-//    private javax.swing.JLabel orangeStockLabel2;
-//    private javax.swing.JButton orderButton;
-//    private javax.swing.JSpinner ribsCount;
-//    private javax.swing.JLabel ribsLabel;
-//    private javax.swing.JLabel ribsPictureLabel;
-//    private javax.swing.JLabel ribsPriceLabel;
-//    private javax.swing.JLabel ribsStockLabel;
-//    private javax.swing.JSpinner riceCount;
-//    private javax.swing.JLabel riceLabel;
-//    private javax.swing.JLabel ricePictureLabel;
-//    private javax.swing.JLabel ricePriceLabel;
-//    private javax.swing.JLabel riceStockLabel;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton backButton1;
+    private javax.swing.JButton backButton2;
+    private javax.swing.JButton backButton3;
+    private javax.swing.JButton backLoginButton;
+    private javax.swing.JPanel breakfastPanel;
+    private javax.swing.JSpinner burgerCount;
+    private javax.swing.JLabel burgerLabel;
+    private javax.swing.JLabel burgerPictureLabel;
+    private javax.swing.JLabel burgerPriceLabel1;
+    private javax.swing.JLabel burgerStockLabel;
+    private javax.swing.JLabel clientNameTiitleLabel;
+    private javax.swing.JSpinner coffeeCount;
+    private javax.swing.JLabel coffeeLabel;
+    private javax.swing.JLabel coffeePictureLabel;
+    private javax.swing.JLabel coffeePriceLabel;
+    private javax.swing.JLabel coffeeStockLabel;
+    private javax.swing.JPanel dinnerPanel;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JSpinner friesCount;
+    private javax.swing.JLabel friesLabel;
+    private javax.swing.JLabel friesPictureLabel;
+    private javax.swing.JLabel friesPriceLabel;
+    private javax.swing.JLabel friesStockLabel;
+    private javax.swing.JToggleButton languageToggle;
+    private javax.swing.JPanel lunchPanel;
+    private javax.swing.JTabbedPane menuPanel;
+    private javax.swing.JSpinner orangeCount2;
+    private javax.swing.JLabel orangeLabel2;
+    private javax.swing.JLabel orangePictureLabel;
+    private javax.swing.JLabel orangePriceLabel;
+    private javax.swing.JLabel orangeStockLabel2;
+    private javax.swing.JButton orderButton;
+    private javax.swing.JSpinner ribsCount;
+    private javax.swing.JLabel ribsLabel;
+    private javax.swing.JLabel ribsPictureLabel;
+    private javax.swing.JLabel ribsPriceLabel;
+    private javax.swing.JLabel ribsStockLabel;
+    private javax.swing.JSpinner riceCount;
+    private javax.swing.JLabel riceLabel;
+    private javax.swing.JLabel ricePictureLabel;
+    private javax.swing.JLabel ricePriceLabel;
+    private javax.swing.JLabel riceStockLabel;
 
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
+        setLocationRelativeTo(null);
+        configureTabsTime();
+        clientNameTiitleLabel.setText("NONE RIGHT NOW");
+
     }
 
     public MainMenu(Customer c) {
@@ -75,42 +80,60 @@ public class MainMenu extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
         loadLanguage(LanguageControl.getLanguage());
+        configureTabsTime();
     }
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new MainMenu().setVisible(true);
-//            }
-//        });
-//    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainMenu().setVisible(true);
+            }
+        });
+    }
+
+    private void configureTabsTime() {
+        LocalTime currentTime = LocalTime.now();
+        int currentHour = currentTime.getHour();
+
+        if (currentHour < 12) {
+            menuPanel.setEnabledAt(1, false);
+            menuPanel.setEnabledAt(2, false);
+        } else if (currentHour < 18) {
+            menuPanel.setEnabledAt(0, false);
+            menuPanel.setEnabledAt(2, false);
+        } else {
+            menuPanel.setEnabledAt(0, false);
+            menuPanel.setEnabledAt(1, false);
+        }
+
+    }
 
     //method to load language on components
     private void loadLanguage(String language) {
@@ -204,13 +227,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         coffeeLabel.setText("Coffee");
 
-        coffeeCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
-
         coffeeStockLabel.setText("Stock: ");
 
         riceLabel.setText("Rice");
-
-        riceCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
         riceStockLabel.setText("Stock: ");
 
@@ -220,42 +239,42 @@ public class MainMenu extends javax.swing.JFrame {
 
         coffeePriceLabel.setText("1.99 $");
 
-        ricePriceLabel.setText("3.99 $");
+        ricePriceLabel.setText("1.99 $");
 
         javax.swing.GroupLayout breakfastPanelLayout = new javax.swing.GroupLayout(breakfastPanel);
         breakfastPanel.setLayout(breakfastPanelLayout);
         breakfastPanelLayout.setHorizontalGroup(
-            breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(breakfastPanelLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(breakfastPanelLayout.createSequentialGroup()
-                        .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(breakfastPanelLayout.createSequentialGroup()
-                                .addComponent(coffeeLabel)
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, breakfastPanelLayout.createSequentialGroup()
-                                .addComponent(coffeeStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)))
-                        .addComponent(coffeeCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(coffeePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(breakfastPanelLayout.createSequentialGroup()
-                        .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(breakfastPanelLayout.createSequentialGroup()
-                                .addComponent(riceLabel)
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, breakfastPanelLayout.createSequentialGroup()
-                                .addComponent(riceStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)))
-                        .addComponent(riceCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(ricePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(coffeePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ricePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(breakfastPanelLayout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(breakfastPanelLayout.createSequentialGroup()
+                                                .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(breakfastPanelLayout.createSequentialGroup()
+                                                                .addComponent(coffeeLabel)
+                                                                .addGap(39, 39, 39))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, breakfastPanelLayout.createSequentialGroup()
+                                                                .addComponent(coffeeStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(27, 27, 27)))
+                                                .addComponent(coffeeCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(68, 68, 68)
+                                                .addComponent(coffeePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(breakfastPanelLayout.createSequentialGroup()
+                                                .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(breakfastPanelLayout.createSequentialGroup()
+                                                                .addComponent(riceLabel)
+                                                                .addGap(39, 39, 39))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, breakfastPanelLayout.createSequentialGroup()
+                                                                .addComponent(riceStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(27, 27, 27)))
+                                                .addComponent(riceCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(68, 68, 68)
+                                                .addComponent(ricePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(coffeePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ricePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(19, Short.MAX_VALUE))
         );
         breakfastPanelLayout.setVerticalGroup(
                 breakfastPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,13 +317,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         orangeLabel2.setText("Orange Juice");
 
-        orangeCount2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
-
         orangeStockLabel2.setText("Stock: ");
 
         friesLabel.setText("Fries");
 
-        friesCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        friesCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
 
         friesStockLabel.setText("Stock: ");
 
@@ -314,40 +331,11 @@ public class MainMenu extends javax.swing.JFrame {
 
         orangePriceLabel.setText("1.99 $");
 
-        friesPriceLabel.setText("4.99 $");
+        friesPriceLabel.setText("1.99 $");
 
         javax.swing.GroupLayout lunchPanelLayout = new javax.swing.GroupLayout(lunchPanel);
         lunchPanel.setLayout(lunchPanelLayout);
         lunchPanelLayout.setHorizontalGroup(
-            lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lunchPanelLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(orangeStockLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(lunchPanelLayout.createSequentialGroup()
-                        .addComponent(orangeLabel2)
-                        .addGap(39, 39, 39)
-                        .addComponent(orangeCount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lunchPanelLayout.createSequentialGroup()
-                        .addGroup(lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lunchPanelLayout.createSequentialGroup()
-                                .addComponent(friesLabel)
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lunchPanelLayout.createSequentialGroup()
-                                .addComponent(friesStockLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)))
-                        .addComponent(friesCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lunchPanelLayout.createSequentialGroup()
-                        .addComponent(orangePictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(orangePriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lunchPanelLayout.createSequentialGroup()
-                        .addComponent(friesPictureLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(friesPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35)));
                 lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(lunchPanelLayout.createSequentialGroup()
                                 .addGap(47, 47, 47)
@@ -376,7 +364,8 @@ public class MainMenu extends javax.swing.JFrame {
                                                 .addComponent(friesPictureLabel)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(friesPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                        .addGap(35, 35, 35));
+                                .addGap(35, 35, 35))
+        );
         lunchPanelLayout.setVerticalGroup(
                 lunchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(lunchPanelLayout.createSequentialGroup()
@@ -418,13 +407,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         burgerLabel.setText("Burger");
 
-        burgerCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
-
         burgerStockLabel.setText("Stock: ");
 
         ribsLabel.setText("Ribs");
-
-        ribsCount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
         ribsStockLabel.setText("Stock: ");
 
@@ -432,9 +417,9 @@ public class MainMenu extends javax.swing.JFrame {
 
         burgerPictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birgir.png"))); // NOI18N
 
-        burgerPriceLabel1.setText("8.99 $");
+        burgerPriceLabel1.setText("1.99 $");
 
-        ribsPriceLabel.setText("21.99 $");
+        ribsPriceLabel.setText("1.99 $");
 
         javax.swing.GroupLayout dinnerPanelLayout = new javax.swing.GroupLayout(dinnerPanel);
         dinnerPanel.setLayout(dinnerPanelLayout);
@@ -505,11 +490,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         exitButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         exitButton.setText("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
-            }
-        });
 
         backLoginButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         backLoginButton.setText("Back");
@@ -574,7 +554,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void languageToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageToggleActionPerformed
-       if (languageToggle.isSelected()) {
+        if (languageToggle.isSelected()) {
             loadLanguage(("fr"));
             languageToggle.setText("English");
         } else {
@@ -584,14 +564,6 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_languageToggleActionPerformed
 
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
-        Order order = new Order(1, "ONGOING");
-
-        DriverTask driverTask = new DriverTask();
-        Thread driverthread = new Thread(driverTask);
-        driverthread.start();
-
-        DriverTask.takeOrder(order);
-
 
     }//GEN-LAST:event_orderButtonActionPerformed
 
@@ -599,87 +571,5 @@ public class MainMenu extends javax.swing.JFrame {
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backLoginButtonActionPerformed
-
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_exitButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainMenu().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backLoginButton;
-    private javax.swing.JPanel breakfastPanel;
-    private javax.swing.JSpinner burgerCount;
-    private javax.swing.JLabel burgerLabel;
-    private javax.swing.JLabel burgerPictureLabel;
-    private javax.swing.JLabel burgerPriceLabel1;
-    private javax.swing.JLabel burgerStockLabel;
-    private javax.swing.JLabel clientNameTiitleLabel;
-    private javax.swing.JSpinner coffeeCount;
-    private javax.swing.JLabel coffeeLabel;
-    private javax.swing.JLabel coffeePictureLabel;
-    private javax.swing.JLabel coffeePriceLabel;
-    private javax.swing.JLabel coffeeStockLabel;
-    private javax.swing.JPanel dinnerPanel;
-    private javax.swing.JButton exitButton;
-    private javax.swing.JSpinner friesCount;
-    private javax.swing.JLabel friesLabel;
-    private javax.swing.JLabel friesPictureLabel;
-    private javax.swing.JLabel friesPriceLabel;
-    private javax.swing.JLabel friesStockLabel;
-    private javax.swing.JToggleButton languageToggle;
-    private javax.swing.JPanel lunchPanel;
-    private javax.swing.JTabbedPane menuPanel;
-    private javax.swing.JSpinner orangeCount2;
-    private javax.swing.JLabel orangeLabel2;
-    private javax.swing.JLabel orangePictureLabel;
-    private javax.swing.JLabel orangePriceLabel;
-    private javax.swing.JLabel orangeStockLabel2;
-    private javax.swing.JButton orderButton;
-    private javax.swing.JSpinner ribsCount;
-    private javax.swing.JLabel ribsLabel;
-    private javax.swing.JLabel ribsPictureLabel;
-    private javax.swing.JLabel ribsPriceLabel;
-    private javax.swing.JLabel ribsStockLabel;
-    private javax.swing.JSpinner riceCount;
-    private javax.swing.JLabel riceLabel;
-    private javax.swing.JLabel ricePictureLabel;
-    private javax.swing.JLabel ricePriceLabel;
-    private javax.swing.JLabel riceStockLabel;
-    // End of variables declaration//GEN-END:variables
-
+    // End of variables declaration                   
 }
