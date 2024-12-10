@@ -6,6 +6,8 @@ package org.example;
 
 import javax.swing.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -14,8 +16,9 @@ import java.util.ResourceBundle;
 public class MainMenu extends javax.swing.JFrame {
 
     Customer current;
+    OrderController oc = new OrderController();
     private ResourceBundle bundle;
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButton1;
     private javax.swing.JButton backButton2;
@@ -81,6 +84,7 @@ public class MainMenu extends javax.swing.JFrame {
         setIconImage(icon.getImage());
         loadLanguage(LanguageControl.getLanguage());
         configureTabsTime();
+
     }
 
     /**
@@ -564,9 +568,77 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_languageToggleActionPerformed
 
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
+        int fries = (int) friesCount.getValue();
+        int burger = (int) burgerCount.getValue();
+        int ribs = (int) ribsCount.getValue();
+        int rice = (int) riceCount.getValue();
+        int orange = (int) orangeCount2.getValue();
+        int coffee = (int) coffeeCount.getValue();
+        if (!(fries > 0 || burger > 0 || ribs > 0 || rice > 0 || coffee > 0 || orange > 0)) {
+            JOptionPane.showMessageDialog(this, "You must select at least one item!");
+            return;
+        }
+        Order order = new Order(current.getId(), "ONGOING");
+        List<Item> selectedItems = new ArrayList<>();
+
+        ItemDAO itemDAO = new ItemDAO();
+
+        if (burger > 0) {
+            Item burgerItem = itemDAO.getItemById(1);
+            if (burgerItem != null) {
+                burgerItem.setStock(burgerItem.getStock() - burger);
+                selectedItems.add(burgerItem);
+            }
+        }
+        if (rice > 0) {
+            Item riceItem = itemDAO.getItemById(2);
+            if (riceItem != null) {
+                riceItem.setStock(riceItem.getStock() - rice);
+                selectedItems.add(riceItem);
+            }
+        }
+        if (orange > 0) {
+            Item orangeItem = itemDAO.getItemById(3);
+            if (orangeItem != null) {
+                orangeItem.setStock(orangeItem.getStock() - orange);
+                selectedItems.add(orangeItem);
+            }
+        }
+        if (coffee > 0) {
+            Item coffeeItem = itemDAO.getItemById(4);
+            if (coffeeItem != null) {
+                coffeeItem.setStock(coffeeItem.getStock() - coffee);
+                selectedItems.add(coffeeItem);
+            }
+        }
+        if (ribs > 0) {
+            Item ribsItem = itemDAO.getItemById(5);
+            if (ribsItem != null) {
+                ribsItem.setStock(ribsItem.getStock() - ribs);
+                selectedItems.add(ribsItem);
+            }
+        }
+        if (fries > 0) {
+            Item friesItem = itemDAO.getItemById(6);
+            if (friesItem != null) {
+                friesItem.setStock(friesItem.getStock() - fries);
+                selectedItems.add(friesItem);
+            }
+        }
+        oc.addOrderItems(selectedItems, order.getOrderId());
+
+        DriverTask driverTask = new DriverTask();
+        Thread driverThread = new Thread(driverTask);
+        driverThread.start();
+
+        new OrderUI(current).setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_orderButtonActionPerformed
 
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt){
+    this.dispose();}
+    
     private void backLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backLoginButtonActionPerformed
         new Login().setVisible(true);
         this.dispose();

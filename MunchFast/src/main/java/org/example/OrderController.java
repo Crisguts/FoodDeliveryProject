@@ -29,6 +29,10 @@ public class OrderController {
         orderDAO.addOrder(order);
     }
 
+    public void addOrderItems(List<Item> list, int orderId) {
+        orderDAO.addOrderItems(orderId, list);
+    }
+
     /**
      * Delete an order
      *
@@ -59,7 +63,7 @@ public class OrderController {
         OrderDAO.updateStatusToDelivered(id);
     }
 
-    public String getAllOrdersAsString(){
+    public String getAllOrdersAsString() {
         return orderDAO.getAllOrdersAsString();
     }
 

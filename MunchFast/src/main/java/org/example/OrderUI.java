@@ -12,6 +12,7 @@ import javax.swing.*;
 public class OrderUI extends javax.swing.JFrame {
 
     Customer current;
+    OrderController oc = new OrderController();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backMenuButton;
     private javax.swing.JButton exitButton;
@@ -28,7 +29,7 @@ public class OrderUI extends javax.swing.JFrame {
     public OrderUI(Customer c) {
         current = c;
         initComponents();
-        visualizeClientOrder.setText("WE GONNA PUT ORDER INFO HERE");
+        visualizeClientOrder.setText(oc.getOrdersByCustomer(c.getId()).toString());
         //load icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
