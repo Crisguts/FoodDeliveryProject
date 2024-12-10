@@ -4,6 +4,7 @@
  */
 package org.example;
 
+import java.awt.Dialog;
 import java.util.List;
 import javax.swing.*;
 
@@ -12,7 +13,7 @@ import javax.swing.*;
  */
 public class Login extends javax.swing.JFrame {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JTextField emailTxtBox;
     private javax.swing.JLabel enterEmailLabel;
     private javax.swing.JButton exitButton;
@@ -210,7 +211,7 @@ public class Login extends javax.swing.JFrame {
                 if (c.getEmail().equals(emailTxtBox.getText())) {
                     // if found then open new form and dispose this one (add a confirmation message
                     JOptionPane.showMessageDialog(this, "Welcome back!");
-                    new MunchFast(CustomerDAO.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
+                    new MainMenu(CustomerDAO.getCustomerByEmail(emailTxtBox.getText())).setVisible(true);
                     this.dispose();
                 }
             }
@@ -223,7 +224,26 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_login_createAcc_BtnActionPerformed
 
     private void viewAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllBtnActionPerformed
-        // TODO add your handling code here:
+          JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
+        textArea.setText("WILL BE ADDED LATER");
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false); // Make the text area read-only           
+        
+        JScrollPane scrollPane = new JScrollPane(textArea);
+            
+            JOptionPane optionPane = new JOptionPane(
+                     scrollPane,
+             JOptionPane.INFORMATION_MESSAGE,
+                  JOptionPane.DEFAULT_OPTION);
+            
+            JDialog dialog = optionPane.createDialog("Database Information");
+            dialog.setModalityType(Dialog.ModalityType.MODELESS);
+            dialog.setSize(700, 500);
+            dialog.setLocation(50,50);
+            dialog.setResizable(true);
+            
+            dialog.setVisible(true);
     }//GEN-LAST:event_viewAllBtnActionPerformed
 
     private void languageToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageToggleActionPerformed
@@ -231,5 +251,5 @@ public class Login extends javax.swing.JFrame {
             languageToggle.setText("French");
         } else languageToggle.setText("English");
     }//GEN-LAST:event_languageToggleActionPerformed
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
