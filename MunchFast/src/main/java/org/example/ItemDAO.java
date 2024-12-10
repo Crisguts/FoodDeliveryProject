@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDAO {
-    private List<Item> items;
+    private static List<Item> items;
 
     /**
      * The Menu is hard coded
@@ -21,15 +21,16 @@ public class ItemDAO {
 
     /**
      * Add a user
+     *
      * @param item
      */
-    public void addItem(Item item){
+    public void addItem(Item item) {
         items.add(item);
     }
 
-    public Item getItemById(int id){
-        for (Item item : items){
-            if(item.getItemId() == id){
+    public Item getItemById(int id) {
+        for (Item item : items) {
+            if (item.getItemId() == id) {
                 return item;
             }
         }
@@ -37,19 +38,30 @@ public class ItemDAO {
         return null;
     }
 
-    public boolean deleteItemById(int id){
+    public boolean deleteItemById(int id) {
         return items.removeIf(item -> item.getItemId() == id);
     }
 
-    public List<Item> getAllItems(){
+    public List<Item> getAllItems() {
         return items;
     }
 
-    public void updateItemStock(int id, int quantity){
-       for(Item item : items){
-           if (item.getItemId() == id){
-               item.setStock(item.getStock() - quantity);
-           }
-       }
+    public void updateItemStock(int id, int quantity) {
+        for (Item item : items) {
+            if (item.getItemId() == id) {
+                item.setStock(item.getStock() - quantity);
+            }
+        }
     }
+
+    public String getAllItemsAsString() {
+        StringBuilder result = new StringBuilder();
+
+        for (Item item : items) {
+            result.append(item.toString()).append("\n");
+        }
+
+        return result.toString();
+    }
+
 }

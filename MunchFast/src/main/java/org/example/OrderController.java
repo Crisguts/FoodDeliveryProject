@@ -59,6 +59,10 @@ public class OrderController {
         OrderDAO.updateStatusToDelivered(id);
     }
 
+    public String getAllOrdersAsString(){
+        return orderDAO.getAllOrdersAsString();
+    }
+
     /**
      * Retrieve Order by Customer ID (can retrieve multiple orders)
      *

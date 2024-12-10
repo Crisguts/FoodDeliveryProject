@@ -227,4 +227,36 @@ public class CustomerDAO {
         return customers;
     }
 
+    public String getAllCustomersAsString() {
+        String sql = "SELECT * FROM CUSTOMERS";
+        StringBuilder result = new StringBuilder();
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                int customerId = rs.getInt("CUSTOMER_ID");
+                String firstName = rs.getString("F_NAME");
+                String lastName = rs.getString("L_NAME");
+                String email = rs.getString("EMAIL");
+                String phoneNumber = rs.getString("PHONE_NUMBER");
+                String deliveryAddress = rs.getString("DELIVER_ADDRESS");
+
+                // Format the row as a string
+                result.append("Customer ID: ").append(customerId)
+                        .append(", First Name: ").append(firstName)
+                        .append(", Last Name: ").append(lastName)
+                        .append(", Email: ").append(email)
+                        .append(", Phone: ").append(phoneNumber)
+                        .append(", Address: ").append(deliveryAddress)
+                        .append("\n");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all customers: " + e.getMessage());
+        }
+
+        return result.toString();
+    }
+
+
 }

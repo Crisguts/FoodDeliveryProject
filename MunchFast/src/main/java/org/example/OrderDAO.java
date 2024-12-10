@@ -203,6 +203,9 @@ public class OrderDAO {
     public List<Order> getAllOrders() {
         String sql = "SELECT * FROM ORDERS";
         List<Order> orders = new ArrayList<>();
+        //TO STRING
+        StringBuilder result = new StringBuilder();
+
 
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
@@ -219,5 +222,33 @@ public class OrderDAO {
             System.err.println("Error fetching all customers: " + e.getMessage());
         }
         return orders;
+    }
+
+    public String getAllOrdersAsString() {
+        String sql = "SELECT * FROM ORDERS";
+        List<Order> orders = new ArrayList<>();
+        //TO STRING
+        StringBuilder result = new StringBuilder();
+
+
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                int orderId = rs.getInt("ORDER_ID");
+                int customerId = rs.getInt("CUSTOMER_ID");
+                String status = rs.getString("STATUS");
+
+                // Format the row as a string
+                result.append("Order ID: ").append(orderId)
+                        .append(", Customer ID: ").append(customerId)
+                        .append(", Status: ").append(status)
+                        .append("\n");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching all orders: " + e.getMessage());
+        }
+
+        return result.toString();
     }
 }

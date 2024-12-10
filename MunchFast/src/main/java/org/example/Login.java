@@ -26,7 +26,9 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton viewAllBtn;
 
     private ResourceBundle bundle;
-    private CustomerController customerController;
+    private CustomerController customerController = new CustomerController();
+    private ItemController itemController = new ItemController();
+
 
     // private CustomerController customerController;
 
@@ -213,7 +215,7 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    //if email doesnt exist in db, then take to create a user
+    //if email doesn't exist in db, then take to create a user
     private void login_createAcc_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_createAcc_BtnActionPerformed
         if (!emailTxtBox.getText().isEmpty()) {
             //get client list from model
@@ -240,7 +242,8 @@ public class Login extends javax.swing.JFrame {
     //admin method to view whats going on in database
     private void viewAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllBtnActionPerformed
         JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
-        textArea.setText("WILL BE ADDED LATER");
+        textArea.setText(customerController.getAllCustomersAsString() + "\n " + itemController.getAllItemsAsString()+ "\n ");
+//        textArea.setText();
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setEditable(false); // Make the text area read-only           

@@ -48,4 +48,8 @@ public class CustomerController {
     public List<Customer> getAllCustomers() {
         return customerDAO.getAllCustomers();
     }
+
+    public String getAllCustomersAsString(){
+        return customerDAO.getAllCustomersAsString();
+    }
 }
