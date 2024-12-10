@@ -3,7 +3,7 @@ package org.example;
 import lombok.Getter;
 
 @Getter
-public class Driver  {
+public class DeletedDriverClass  {
 //    private String licensePlate;
 //    private String licenseNumber;
 //    private double rating;
@@ -11,7 +11,6 @@ public class Driver  {
 //    private Order assignedOrder;
 //    private boolean isFast;
 
-    //I SAW COMMENTS ABOUT USING A BUILDER PATTERN FOR USE OF MANY PARAMETERS
 
 //    /**
 //     * To initialize and set the Person's properties.
@@ -22,7 +21,7 @@ public class Driver  {
 //     * @param phone     to initialize the phone value.
 //     * @throws InvalidArgumentException if any parameter is invalid.
 //     */
-//    public Driver(String firstname, String lastname, String email, String phone, String licenseP, String licenseNb) throws InvalidArgumentException {
+//    public DeletedDriverClass(String firstname, String lastname, String email, String phone, String licenseP, String licenseNb) throws InvalidArgumentException {
 //        super(firstname, lastname, email, phone);
 //        isFast = false;
 //        assignedOrder = null;  //initialize as null since he has no order assigned to him

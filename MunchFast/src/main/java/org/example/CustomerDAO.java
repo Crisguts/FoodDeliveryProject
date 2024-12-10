@@ -53,6 +53,8 @@ public class CustomerDAO {
             }
         } catch (SQLException e) {
             System.err.println("Error fetching customer by email: " + e.getMessage());
+        } catch (InvalidArgumentException e) {
+            throw new RuntimeException(e);
         }
         return customer;
     }
@@ -79,6 +81,8 @@ public class CustomerDAO {
             }
         } catch (SQLException e) {
             System.err.println("Error fetching all customers: " + e.getMessage());
+        } catch (InvalidArgumentException e) {
+            throw new RuntimeException(e);
         }
         return customers;
     }

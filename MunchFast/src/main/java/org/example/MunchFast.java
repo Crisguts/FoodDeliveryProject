@@ -75,6 +75,7 @@ public class MunchFast extends javax.swing.JFrame {
         jLabel16.setText("Stock: ");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Munch Fast !");
         setMinimumSize(new java.awt.Dimension(730, 510));
         setResizable(false);
         setSize(new java.awt.Dimension(730, 510));
