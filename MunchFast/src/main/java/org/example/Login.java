@@ -6,6 +6,8 @@ package org.example;
 
 import java.awt.Dialog;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.*;
 
 /**
@@ -23,9 +25,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel logoLabel;
     private javax.swing.JButton viewAllBtn;
 
-    
+
+    private ResourceBundle bundle;
     private CustomerController customerController;
     // private CustomerController customerController;
+
     /**
      * Creates new form Login
      */
@@ -38,6 +42,8 @@ public class Login extends javax.swing.JFrame {
         setIconImage(icon.getImage());
         // Initialize the CustomerController() to handle operations (create, read, delete...)
         customerController = new CustomerController();
+
+        loadLanguage(LanguageControl.getLanguage());
     }
 
     /**
@@ -207,6 +213,7 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    //if email doesnt exist in db, then take to create a user
     private void login_createAcc_BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_createAcc_BtnActionPerformed
         if (!emailTxtBox.getText().isEmpty()) {
             //get client list from model
@@ -228,33 +235,54 @@ public class Login extends javax.swing.JFrame {
         emailTxtBox.setText("");
     }//GEN-LAST:event_login_createAcc_BtnActionPerformed
 
+    //admin method to view whats going on in database
     private void viewAllBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllBtnActionPerformed
-          JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
+        JTextArea textArea = new JTextArea(10, 30); // 10 rows, 30 columns
         textArea.setText("WILL BE ADDED LATER");
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setEditable(false); // Make the text area read-only           
-        
+
         JScrollPane scrollPane = new JScrollPane(textArea);
-            
-            JOptionPane optionPane = new JOptionPane(
-                     scrollPane,
-             JOptionPane.INFORMATION_MESSAGE,
-                  JOptionPane.DEFAULT_OPTION);
-            
-            JDialog dialog = optionPane.createDialog("Database Information");
-            dialog.setModalityType(Dialog.ModalityType.MODELESS);
-            dialog.setSize(700, 500);
-            dialog.setLocation(50,50);
-            dialog.setResizable(true);
-            
-            dialog.setVisible(true);
+
+        JOptionPane optionPane = new JOptionPane(
+                scrollPane,
+                JOptionPane.INFORMATION_MESSAGE,
+                JOptionPane.DEFAULT_OPTION);
+
+        JDialog dialog = optionPane.createDialog("Database Information");
+        dialog.setModalityType(Dialog.ModalityType.MODELESS);
+        dialog.setSize(700, 500);
+        dialog.setLocation(50, 50);
+        dialog.setResizable(true);
+
+        dialog.setVisible(true);
     }//GEN-LAST:event_viewAllBtnActionPerformed
 
+    //method to load language on components
+    private void loadLanguage(String language) {
+        //set with language class
+        LanguageControl.setLanguage(language);
+        //load bundle
+        bundle = ResourceBundle.getBundle("language", LanguageControl.getCurrentLocale());
+
+        //update UI
+        exitButton.setText(bundle.getString("exit"));
+        login_createAcc_Btn.setText(bundle.getString("loginCreate"));
+        jLabel2.setText(bundle.getString("welcome"));
+        enterEmailLabel.setText(bundle.getString("email"));
+    }
+
+
+    //change language
     private void languageToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageToggleActionPerformed
-        if (languageToggle.getText().equals("English")) {
+        if (languageToggle.isSelected()) {
+            loadLanguage(("fr"));
+            languageToggle.setText("English");
+        } else {
+            loadLanguage("en");
             languageToggle.setText("French");
-        } else languageToggle.setText("English");
+        }
     }//GEN-LAST:event_languageToggleActionPerformed
     // End of variables declaration                   
 }

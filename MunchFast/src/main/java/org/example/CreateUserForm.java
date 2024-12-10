@@ -6,6 +6,7 @@ package org.example;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import java.util.ResourceBundle;
 
 /**
  * @author 22cri
@@ -30,7 +31,7 @@ public class CreateUserForm extends javax.swing.JFrame {
     private javax.swing.JToggleButton languageToggle;
     private javax.swing.JLabel logoLabel;
 
-
+    private ResourceBundle bundle;
     private CustomerController customerController;
 
     /**
@@ -44,6 +45,7 @@ public class CreateUserForm extends javax.swing.JFrame {
         setIconImage(icon.getImage());
         // Initialize the CustomerController() to handle operations (create, read, delete...)
         customerController = new CustomerController();
+        loadLanguage(LanguageControl.getLanguage());
     }
 
     /**
@@ -79,6 +81,25 @@ public class CreateUserForm extends javax.swing.JFrame {
                 new CreateUserForm().setVisible(true);
             }
         });
+    }
+
+    //method to load language on components
+    private void loadLanguage(String language) {
+        //set with language class
+        LanguageControl.setLanguage(language);
+        //load bundle
+        bundle = ResourceBundle.getBundle("language", LanguageControl.getCurrentLocale());
+
+        //update UI
+        exitButton.setText(bundle.getString("exit"));
+        enterAddressLabel.setText(bundle.getString("address"));
+        enterPhoneLabel.setText(bundle.getString("phoneNumber"));
+        enterFnameLabel.setText(bundle.getString("firstName"));
+        enterLnameLabel.setText(bundle.getString("lastName"));
+        enterEmailLabel.setText(bundle.getString("email"));
+        createAccButton.setText(bundle.getString("create"));
+        createTitleLabel.setText(bundle.getString("createLabel"));
+        backButton.setText(bundle.getString("back"));
     }
 
     /**
@@ -270,9 +291,13 @@ public class CreateUserForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void languageToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageToggleActionPerformed
-        if (languageToggle.getText().equals("English")) {
+        if (languageToggle.isSelected()) {
+            loadLanguage(("fr"));
+            languageToggle.setText("English");
+        } else {
+            loadLanguage("en");
             languageToggle.setText("French");
-        } else languageToggle.setText("English");
+        }
     }//GEN-LAST:event_languageToggleActionPerformed
 
     //goes back to login
