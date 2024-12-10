@@ -3,10 +3,10 @@ package org.example;
 import java.util.List;
 
 public class ItemController {
-    ItemDao menuItemDAO;
+    private ItemDAO menuItemDAO;
 
     public ItemController() {
-        menuItemDAO = new ItemDao();
+        menuItemDAO = new ItemDAO();
     }
 
     /**

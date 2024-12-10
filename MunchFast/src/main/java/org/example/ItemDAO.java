@@ -3,17 +3,17 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDao {
+public class ItemDAO {
     private List<Item> items;
 
     /**
      * The Menu is hardcoded
      */
-    public ItemDao() {
+    public ItemDAO() {
         items = new ArrayList<>();
-        items.add(new Item(1, "Burger", 8.99, 100, "Lunch"));
-        items.add(new Item(2, "Rice", 3.99, 100, "Dinner"));
-        items.add(new Item(3, "Orange Juice", 1.99, 100, "Breakfast"));
+        items.add(new Item(1, "Burger", 8.99, 100, "Dinner"));
+        items.add(new Item(2, "Rice", 3.99, 100, "Breakfast"));
+        items.add(new Item(3, "Orange Juice", 1.99, 100, "Lunch"));
         items.add(new Item(4, "Coffee", 1.99, 100, "Breakfast"));
         items.add(new Item(5, "Ribs", 21.99, 100, "Dinner"));
         items.add(new Item(6, "Fries", 4.99, 100, "Lunch"));
