@@ -6,6 +6,7 @@ package org.example;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import java.util.ResourceBundle;
 
 /**
  * @author 22cri
@@ -33,6 +34,8 @@ public class CreateUserForm extends javax.swing.JFrame {
     // Customer Controller
     CustomerController customerController;
 
+    private ResourceBundle bundle;
+
     /**
      * Creates new form CreateUserForm
      */
@@ -42,7 +45,10 @@ public class CreateUserForm extends javax.swing.JFrame {
         //load icon
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/munchFastIcon.png"));
         setIconImage(icon.getImage());
+        // Initialize the CustomerController() to handle operations (create, read, delete...)
         customerController = new CustomerController();
+        loadLanguage(LanguageControl.getLanguage());
+
     }
 
     /**
@@ -78,6 +84,25 @@ public class CreateUserForm extends javax.swing.JFrame {
                 new CreateUserForm().setVisible(true);
             }
         });
+    }
+
+    //method to load language on components
+    private void loadLanguage(String language) {
+        //set with language class
+        LanguageControl.setLanguage(language);
+        //load bundle
+        bundle = ResourceBundle.getBundle("language", LanguageControl.getCurrentLocale());
+
+        //update UI
+        exitButton.setText(bundle.getString("exit"));
+        enterAddressLabel.setText(bundle.getString("address"));
+        enterPhoneLabel.setText(bundle.getString("phoneNumber"));
+        enterFnameLabel.setText(bundle.getString("firstName"));
+        enterLnameLabel.setText(bundle.getString("lastName"));
+        enterEmailLabel.setText(bundle.getString("email"));
+        createAccButton.setText(bundle.getString("create"));
+        createTitleLabel.setText(bundle.getString("createLabel"));
+        backButton.setText(bundle.getString("back"));
     }
 
     /**
@@ -269,9 +294,13 @@ public class CreateUserForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void languageToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageToggleActionPerformed
-        if (languageToggle.getText().equals("English")) {
+        if (languageToggle.isSelected()) {
+            loadLanguage(("fr"));
+            languageToggle.setText("English");
+        } else {
+            loadLanguage("en");
             languageToggle.setText("French");
-        } else languageToggle.setText("English");
+        }
     }//GEN-LAST:event_languageToggleActionPerformed
 
     //goes back to login
@@ -303,8 +332,11 @@ public class CreateUserForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please fill all the fields");
         } else {
             try {
+
                 // Controller adds the Customer (so it could be saved inside the Customers Table)
-                customerController.addCustomer(new Customer(fname, lname, email, phone, address));
+                Customer c = new Customer(fname, lname, email, phone, address);
+                customerController.addCustomer(c);
+
                 JOptionPane.showMessageDialog(null, "Success! Welcome to Munch Fast, " + fname + " " + lname + ", please login with your email.");
                 new Login().setVisible(true);
                 this.dispose();
